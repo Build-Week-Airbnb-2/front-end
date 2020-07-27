@@ -11,9 +11,17 @@ const Register = () => {
 	let [ formValues, setFormValues ] = useState({
 		email: '',
 		password: ''
+	});
+
+	const formSchema = Yup.object().shape({
+		email: Yup.string().email('Must be a valid email address.').required('Must include email address.'),
+		password: Yup.string().min(6, 'Passwords must be at least 6 characters long.').required('Password is Required')
+	});
+
+	let [ errors, setErrors ] = useState({
+        email: '',
+        password: ''
     });
-    
-    let [errors, setErrors] = useState({})
 
 	const postUser = (user) => {
 		axios
@@ -27,40 +35,63 @@ const Register = () => {
 	};
 
 	const handleSubmit = (e) => {
-		e.preventDefault();
+        e.preventDefault();
+        console.log('Submitted wow')
 		let newUser = {
 			email: formValues.email.trim(),
 			password: formValues.password.trim()
-		};
+        };
+        console.log(errors)
 		postUser(newUser);
 	};
 
 	const handleChange = (e) => {
+        e.persist()
+        Yup.reach(formSchema, e.target.name)
+        .validate(e.target.value)
+        .then((valid) => {
+            setErrors({
+		 		...errors,
+		 		[e.target.name]: ''
+		 	})
+        })
+        .catch((err) => {
+            setErrors({
+                ...errors,
+                [e.target.name]: err.message
+            })
+        })
+       
 		setFormValues({ ...formValues, [e.target.name]: e.target.value });
-		console.log(formValues);
 	};
 
 	return (
 		<div className="form-container">
 			<h1>Register</h1>
 			<form className="form" onSubmit={handleSubmit}>
-				<TextField
-					className="email"
-					type="email"
-					name="email"
-					id="name"
-					label="email"
-					onChange={handleChange}
-				/>
-				<TextField
-					className="password"
-					type="password"
-					name="password"
-					id="name"
-					label="password"
-					onChange={handleChange}
-				/>
+                <div className="field-container">
+                    <TextField
+                        className="email"
+                        type="email"
+                        name="email"
+                        id="name"
+                        label="email"
+                        onChange={handleChange}
+                    />
+                    {errors.email.length ? <p>{errors.email}</p> : null}
+                </div>
 
+                <div className="field-container">
+                    <TextField
+                        className="password"
+                        type="password"
+                        name="password"
+                        id="name"
+                        label="password"
+                        onChange={handleChange}
+                    />
+                    {errors.password.length ? <p>{errors.password}</p> : null}
+                </div>
 				<Button type="submit" variant="contained" color="secondary">
 					REGISTER
 				</Button>
