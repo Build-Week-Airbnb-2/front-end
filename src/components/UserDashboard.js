@@ -6,10 +6,10 @@ import PropertyList from './PropertyList'
 
  function UserDashboard(props) {
   return (
-    <div>
+    <div className='user-dashboard'>
       <h1>Airbnb pricing calculator</h1>
       {!props.hasProperties && (
-        <div>
+        <div className='user-dashboard-empty'>
           <h2>Looks like you don´t have any properties.</h2>
           <h2>Please Import a Property to see our pricing suggestion</h2>
           <Link to='/add-property'>Add Property</Link>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './register.styles.css';
 import { Link, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { TextField, Select, MenuItem, InputLabel, Checkbox } from '@material-ui/core';
