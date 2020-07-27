@@ -1,7 +1,9 @@
 //import individual component styles from ./components
 @import './fonts.scss';
+@import './variables.scss';
 @import './components/register.scss';
 @import './components/userDashboard.scss';
+@import './components/addProperty.scss';
 
 
 * {
