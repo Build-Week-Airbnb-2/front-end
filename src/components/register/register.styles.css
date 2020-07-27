@@ -22,10 +22,6 @@ form {
     
 }
 
-form *{
-    margin: 5rem;
-}
-
 .form-container {
 	width: 100%;
 	height: 80vh;
