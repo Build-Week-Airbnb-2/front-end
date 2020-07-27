@@ -1,17 +1,28 @@
 import React from 'react';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
+import 'reset-css';
+import './styles/App.scss';
+
+//components
+import UserDashboard from './components/UserDashboard';
+import AddProperty from './components/AddProperty';
 import Register from './components/register/register';
 
-import 'reset-css';
-import './App.scss';
-
 function App() {
-	return (
-		<div className="App">
-			<h1>Airbnb Pricing Calculator</h1>
-			<Route path="/register" render={() => <Register />} />
-		</div>
-	);
+  return (
+    <Switch> 
+      <Route path="/register" render={() => <Register />} />
+      <Route path='/add-property'>
+        <AddProperty />
+      </Route>
+      <Route path='/'>
+        <UserDashboard />
+      </Route>
+    </Switch>
+  );
+
 }
 
 export default App;
+
+
