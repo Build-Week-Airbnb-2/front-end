@@ -6,10 +6,12 @@ import './styles/App.scss';
 //components
 import UserDashboard from './components/UserDashboard';
 import AddProperty from './components/AddProperty';
+import Register from './components/register/register';
 
 function App() {
   return (
     <Switch> 
+      <Route path="/register" render={() => <Register />} />
       <Route path='/add-property'>
         <AddProperty />
       </Route>
@@ -18,6 +20,7 @@ function App() {
       </Route>
     </Switch>
   );
+
 }
 
 export default App;
