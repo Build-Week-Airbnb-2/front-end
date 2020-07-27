@@ -7,49 +7,23 @@ import RootRef from '@material-ui/core/RootRef';
 
 import * as Yup from 'yup';
 
-
-
-
-
 const Register = () => {
-   
+	return (
+		<div className="form-container">
+			<h1>Register</h1>
+			<form className="form">
+				<TextField className="email" type="email" name="email" id="name" label="email" />
+				<TextField className="password" type="password" name="password" id="name" label="password" />
 
-    
-    return(
-        <div className="form-container">
-            <h1>Register</h1>
-            <form className="form" >
-              
-                {/* <input type="text" name="" className='name' id="" placeholder="Isaiah"/> */}
-
-                <TextField
-                    className="email"
-                    type="email"
-                    name="email"
-                    id="name"
-                    label="email"
-                />
-                <TextField
-                    className="password"
-                    type="password"
-                    name="password"
-                    id="name"
-                    label="password"
-                />
-
-                {/* <Button type="submit" value="Submit" onSubmit={handleSubmit} color='primary'>Add Teammate</Button> */}
-               
-               
-
-                <Button type="submit" variant="contained" color="secondary">
-                    REGISTER
+				<Button type="submit" variant="contained" color="secondary">
+					REGISTER
 				</Button>
-            </form>
-            <Link className="bottom-link" to="/team">
-                <Button>Login</Button>
-            </Link>
-        </div>
-    )
-}
+			</form>
+			<Link className="bottom-link" to="/team">
+				<Button>Login</Button>
+			</Link>
+		</div>
+	);
+};
 
-export default Register
+export default Register;
