@@ -3,11 +3,18 @@ import { Switch, Route, Link } from 'react-router-dom';
 import 'reset-css';
 import './styles/App.scss';
 
+//components
+import UserDashboard from './components/UserDashboard';
+import AddProperty from './components/AddProperty';
+
 function App() {
   return (
     <Switch> 
+      <Route path='/add-property'>
+        <AddProperty />
+      </Route>
       <Route path='/'>
-        <h1>Airbnb Pricing Calculator</h1>
+        <UserDashboard />
       </Route>
     </Switch>
   );
