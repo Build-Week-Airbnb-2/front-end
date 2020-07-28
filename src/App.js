@@ -9,15 +9,13 @@ import AddProperty from './components/AddProperty';
 import Register from './components/register/register';
 import Login from './components/Login/components/Log';
 import PrivateRoute from './components/PrivateComponent';
+import Navbar from './components/navbar/navbar'
 
 
 function App() {
   return (
     <div>
-    <Link to='/login'>Login </Link>
-    <Link to='/register'>register </Link>
-    <Link to='/'>home</Link>
-    <Link to='/add-property'>add property</Link>
+    <Navbar />
     <Switch> 
       <Route path="/register" render={() => <Register />} />
       <Route path="/login" render={() => <Login />} />

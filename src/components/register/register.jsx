@@ -11,7 +11,6 @@ const initialFormValues = {
 	email: '',
 	password: ''
 }
-import NavBar from '../navbar/navbar'
 
 
 const Register = () => {
@@ -60,8 +59,6 @@ const Register = () => {
 
 	return (
 		<div className="form-container">
-			<NavBar></NavBar>
-
 			<form className="form" onSubmit={handleSubmit}>
 				<div className="field-container">
 					<TextField
