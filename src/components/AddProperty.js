@@ -1,21 +1,38 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch} from 'react-redux'
+
+import {getPriceSuggestion} from '../store/actions/actions'
+
+// const initialFormValues = {
+//   name: "",
+//   summary: "",
+//   city: "",
+//   state: "",
+//   country: "",
+//   bathrooms: "",
+//   bedrooms: "",
+//   beds: "",
+//   cancellation_policy: "",
+//   cleaning_fee: "",
+// };
 
 const initialFormValues = {
-  name: "",
-  summary: "",
-  city: "",
-  state: "",
-  country: "",
-  bathrooms: "",
-  bedrooms: "",
-  beds: "",
-  cancellation_policy: "",
-  cleaning_fee: "",
+  name: " My Seattle Home",
+  summary: "A quiet house in north seattle",
+  city: " Everret",
+  state: "WA",
+  country: "United States",
+  bathrooms: 1.75,
+  bedrooms: 3,
+  beds: 6,
+  cancellation_policy: "moderate",
+  cleaning_fee: "$15.00",
 };
 
 export default function AddProperty() {
   const [formValues, setFormValues] = useState(initialFormValues);
+   const dispatch = useDispatch();
   const history = useHistory();
 
   const changeHandler = (e) => {
@@ -27,11 +44,13 @@ export default function AddProperty() {
 
   const addProperty = (e) => {
     e.preventDefault();
-    // axiosWithAuth post call
-    console.log("added property");
+    // TODO: add property to backend endpoint 
+
+    // getting price suggestion from DS Model
+    dispatch(getPriceSuggestion(formValues, history))
+
     setFormValues(initialFormValues);
-    //send user back to dashboard
-    history.push("/");
+    
   };
 
   return (

@@ -1,19 +1,7 @@
 import axios from 'axios'
 import axiosWithAuth from '../../utils/axiosWithAuth'
 
-// === action without payload
-// export const TOGGLE_EDITING = "TOGGLE_EDITING";
-// export const toggleEditing = () => {
-//   return { type: TOGGLE_EDITING };
-// };
-
-//  === action with payload ===
-// export const UPDATE_TITLE = "UPDATE_TITLE";
-// export const updateTitle = newTitle => {
-//   return { type: UPDATE_TITLE, payload: newTitle };
-// };
-
-
+// ======= USER ACTIONS ========
 
 export const registerUser = (user, history) => dispatch => {
   axios.post('https://airbnboptimalpricing.herokuapp.com/api/auth/register', user)
@@ -37,6 +25,9 @@ export const loginUser = (user, history) => dispatch =>{
 		})}
 
 
+		// ====== CRUD OPERATIONS ======
+
+		// == READ ==
 export const GET_PROPERTIES = 'GET_PROPERTIES'
 export const getProperties = () => {
 	console.log('getting properties actions file');
@@ -49,4 +40,33 @@ export const getProperties = () => {
 	// 	.catch(err =>{
 	// 		console.log(err);
 	// 	})
+}
+
+// === CREATE ====
+
+
+
+// ==== UPDATE ====
+
+
+
+// ===== DESTROY =====
+
+
+
+
+// ======= DS MODEL OPERATIONS =======
+
+
+export const getPriceSuggestion = (property, history) => dispatch =>{
+	axios.post('https://ds-bw-airbnb-2.herokuapp.com/predict', property)
+		.then(res =>{
+			console.log(res);
+			alert(`Suggested Price ${res.data.predicted_price}`)
+			// predicted price res.data.predicted_price
+			history.push('/')
+		})
+		.catch(err =>{
+			console.log({err});
+		})
 }
