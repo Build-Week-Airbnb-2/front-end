@@ -1,20 +1,26 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
+import { useDispatch} from 'react-redux'
 import { FormControl, Input, Typography as Text, Button } from '@material-ui/core';
+import {loginUser} from '../../../store/actions/actions'
 
 export default ({comparePassword})=>{
-const [userInput, setuserInput] = useState({email: '', password: ''});
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const [userInput, setuserInput] = useState({email: '', password: ''});
+
 
 // handling user input 
 const onChangeHandler = (e)=>{
-setuserInput({...userInput,
-[e.target.name]: e.target.value
-})
+    setuserInput({...userInput,
+    [e.target.name]: e.target.value
+    })
 }
 // handling a submission 
 const onSubmitHandler =(e)=>{
-e.preventDefault();
-comparePassword(userInput)
+    e.preventDefault();
+   dispatch(loginUser(userInput, history))
+// comparePassword(userInput)
 }
 
     return(

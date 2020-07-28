@@ -11,7 +11,6 @@ function PrivateRoute({children, ...rest}){
               } else{
                   return {...children}
               }
-              
           } else{
               return <Redirect to='/login' />
           }

@@ -1,9 +1,11 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
 
+
+//import components
 import Property from './Property'
 
-export default function PropertyList() {
+function PropertyList() {
   const propeties = useSelector( state => state.properties)
   return (
     <div>
@@ -16,3 +18,5 @@ export default function PropertyList() {
     </div>
   )
 }
+
+export default PropertyList;
