@@ -11,6 +11,8 @@ const initialFormValues = {
 	email: '',
 	password: ''
 }
+import NavBar from '../navbar/navbar'
+
 
 const Register = () => {
 	const dispatch = useDispatch();
@@ -58,8 +60,9 @@ const Register = () => {
 
 	return (
 		<div className="form-container">
+			<NavBar></NavBar>
+
 			<form className="form" onSubmit={handleSubmit}>
-				<h1>Register</h1>
 				<div className="field-container">
 					<TextField
 						className="email"
@@ -87,9 +90,7 @@ const Register = () => {
 					REGISTER
 				</Button>
 			</form>
-			<Link className="bottom-link" to="/login">
-				<Button>Login</Button>
-			</Link>
+			
 		</div>
 	);
 };

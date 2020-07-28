@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+
+#nav-links {
+	width: 100%;
+	display: flex;
+    justify-content: end;
+    color: white;
+}
+
+.nav-link{
+    color: white;
+    text-decoration: none;
+}
+
+#icon{
+    font-family: 'Yellowtail', cursive;
+}
+
