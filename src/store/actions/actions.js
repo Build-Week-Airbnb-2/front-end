@@ -14,17 +14,33 @@ export const registerUser = (user, history) => dispatch => {
 			//TODO: handle errors
 		})}
 
+export const LOG_IN = 'LOG_IN'		
 export const loginUser = (user, history) => dispatch =>{
   axios.post('https://airbnboptimalpricing.herokuapp.com/api/auth/login', user)
 		.then(res => {
-      window.localStorage.setItem('token', JSON.stringify(res.data.token));
+			window.localStorage.setItem('token', JSON.stringify(res.data.token));
 			history.push('/');
+			return {type: LOG_IN} // BUG: not hitting this action
 		})
 		.catch( err => {
 			console.log(err.response);
 			//TODO: handle errors
 		})}
 
+export const LOG_OUT = 'LOG_OUT'
+export const logOut = (history)=>{
+	history.push('/login')  //switch to marketing site
+	return {type: LOG_OUT}
+}
+
+
+export const USER_IS_LOGGED_IN = 'USER_IS_LOGGED_IN';
+export const checkLogIn = () =>{
+	const item = window.localStorage.getItem('token')
+	if(item){
+		return {type: USER_IS_LOGGED_IN}
+	}
+}
 
 		// ====== CRUD OPERATIONS ======
 
