@@ -1,37 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState} from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import {useDispatch} from 'react-redux'
 import Button from '@material-ui/core/Button';
-import { TextField, Select, MenuItem, InputLabel, Checkbox } from '@material-ui/core';
-import RootRef from '@material-ui/core/RootRef';
-import axios from 'axios';
+import { TextField} from '@material-ui/core';
 import * as Yup from 'yup';
+import {registerUser} from '../../store/actions/actions'
+
+//refactored code to include initialForm values instead of setting state each time 
+const initialFormValues = {
+	email: '',
+	password: ''
+}
 
 const Register = () => {
-	let [ formValues, setFormValues ] = useState({
-		email: '',
-		password: ''
-	});
+	const dispatch = useDispatch();
+	const history = useHistory();
+	let [ formValues, setFormValues ] = useState(initialFormValues);
 
 	const formSchema = Yup.object().shape({
 		email: Yup.string().email('Must be a valid email address.').required('Must include email address.'),
 		password: Yup.string().min(6, 'Passwords must be at least 6 characters long.').required('Password is Required')
 	});
 
-	let [ errors, setErrors ] = useState({
-		email: '',
-		password: ''
-	});
+	let [ errors, setErrors ] = useState(initialFormValues);
 
-	const postUser = (user) => {
-		axios
-			.post('https://reqres.in/api/users/', user)
-			.then((res) => {
-				console.log(res.data);
-			})
-			.catch((er) => {
-				console.log(er);
-			});
-	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -40,7 +32,8 @@ const Register = () => {
 			email: formValues.email.trim(),
 			password: formValues.password.trim()
 		};
-		postUser(newUser);
+		dispatch(registerUser(newUser, history));
+
 	};
 
 	const handleChange = (e) => {

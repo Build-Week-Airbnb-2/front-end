@@ -1,3 +1,4 @@
+import axios from 'axios'
 // === action without payload
 // export const TOGGLE_EDITING = "TOGGLE_EDITING";
 // export const toggleEditing = () => {
@@ -10,12 +11,17 @@
 //   return { type: UPDATE_TITLE, payload: newTitle };
 // };
 
-// === Async Actions ====
-// const asyncOperation = data => dispatch => {
-// 	axios.post('/api/data-call', data)
-// 		.then( res => {
-// 			dispatch({type: CALL_SUCCESS, payload: red.data });
-// 		})
-// 		.catch( err => {
-// 			dispatch({ type: CALL_FALIURE, payload: err.response });
-// 		})}
+
+
+export const registerUser = (user, history) => dispatch => {
+  axios.post('https://airbnboptimalpricing.herokuapp.com/api/auth/register', user)
+		.then( res => {
+      alert('Registered User', res.data.email)
+			history.push('/login')
+		})
+		.catch( err => {
+			console.log(err);
+		})}
+
+
+

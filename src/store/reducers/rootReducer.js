@@ -1,4 +1,5 @@
 //import  actions from actions import { * as ACTIONS} from
+import { REGISTER_USER } from '../actions/actions';
 
 export const initialState = {
     hasProperties: false,
@@ -11,3 +12,4 @@ export const rootReducer = (state = initialState, action) =>{
         return state
     }  
 }
+
