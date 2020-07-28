@@ -1,10 +1,16 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import {getProperties} from '../store/actions/actions'
 import { connect } from 'react-redux'
 
 import PropertyList from './PropertyList'
 
  function UserDashboard(props) {
+
+  useEffect(()=>{
+    getProperties()
+  })
+
   return (
     <div className='user-dashboard'>
       <h1>Airbnb pricing calculator</h1>
@@ -31,4 +37,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps,{})(UserDashboard);
+export default connect(mapStateToProps,{getProperties})(UserDashboard);

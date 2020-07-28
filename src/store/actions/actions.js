@@ -1,4 +1,6 @@
 import axios from 'axios'
+import axiosWithAuth from '../../utils/axiosWithAuth'
+
 // === action without payload
 // export const TOGGLE_EDITING = "TOGGLE_EDITING";
 // export const toggleEditing = () => {
@@ -35,3 +37,16 @@ export const loginUser = (user, history) => dispatch =>{
 		})}
 
 
+export const GET_PROPERTIES = 'GET_PROPERTIES'
+export const getProperties = () => {
+	console.log('getting properties actions file');
+	//TODO: Get properties from endpoint, set propeties to state in reducer
+	// axiosWithAuth()
+	// 	.get()
+	// 	.then(res =>{
+	// 		console.log(res);
+	// 	})
+	// 	.catch(err =>{
+	// 		console.log(err);
+	// 	})
+}
