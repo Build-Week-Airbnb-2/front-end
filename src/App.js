@@ -7,7 +7,7 @@ import './styles/App.scss';
 import UserDashboard from './components/UserDashboard';
 import AddProperty from './components/AddProperty';
 import Register from './components/register/register';
-import Login from './components/Login/components/Login';
+import Login from './components/Login/components/Log';
 import PrivateRoute from './components/PrivateComponent';
 
 
@@ -21,9 +21,10 @@ function App() {
     <Switch> 
       <Route path="/register" render={() => <Register />} />
       <Route path="/login" render={() => <Login />} />
-      <Route path='/add-property'>
+      
+      <PrivateRoute path='/add-property'>
         <AddProperty />
-      </Route>
+      </PrivateRoute>
       <PrivateRoute path='/'>
         <UserDashboard />
       </PrivateRoute>

@@ -21,7 +21,17 @@ export const registerUser = (user, history) => dispatch => {
 		})
 		.catch( err => {
 			console.log(err);
+			//TODO: handle errors
 		})}
 
+export const loginUser = (user, history) => dispatch =>{
+  axios.post('https://airbnboptimalpricing.herokuapp.com/api/auth/login', user)
+		.then(res => {
+      window.localStorage.setItem('token', JSON.stringify(res.data.token));
+			history.push('/');
+		})
+		.catch( err => {
+			//TODO: handle errors
+		})}
 
 
