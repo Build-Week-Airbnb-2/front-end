@@ -6,7 +6,7 @@ import { TextField, Select, MenuItem, InputLabel, Checkbox } from '@material-ui/
 import RootRef from '@material-ui/core/RootRef';
 import axios from 'axios';
 import * as Yup from 'yup';
-import Navbar from '../navbar/navbar'
+import NavBar from '../navbar/navbar'
 
 
 const Register = () => {
@@ -68,7 +68,7 @@ const Register = () => {
 
 	return (
 		<div className="form-container">
-			<Navbar></Navbar>
+			<NavBar></NavBar>
 
 			<form className="form" onSubmit={handleSubmit}>
 				<div className="field-container">

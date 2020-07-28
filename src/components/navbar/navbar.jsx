@@ -2,7 +2,7 @@ import React from 'react';
 import {AppBar, Toolbar, IconButton, Typography, Button} from '@material-ui/core'
 import './navbar.styles.css'
 import {Link} from 'react-router-dom'
-const Navbar = () => {
+const NavBar = () => {
 	return (
         <AppBar position="static" id="app-bar" color='secondary'>
             <Toolbar>
@@ -22,4 +22,4 @@ const Navbar = () => {
     )
 };
 
-export default Navbar;
+export default NavBar;
