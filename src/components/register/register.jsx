@@ -6,6 +6,8 @@ import { TextField, Select, MenuItem, InputLabel, Checkbox } from '@material-ui/
 import RootRef from '@material-ui/core/RootRef';
 import axios from 'axios';
 import * as Yup from 'yup';
+import Navbar from '../navbar/navbar'
+
 
 const Register = () => {
 	let [ formValues, setFormValues ] = useState({
@@ -66,8 +68,9 @@ const Register = () => {
 
 	return (
 		<div className="form-container">
+			<Navbar></Navbar>
+
 			<form className="form" onSubmit={handleSubmit}>
-				<h1>Register</h1>
 				<div className="field-container">
 					<TextField
 						className="email"
@@ -95,9 +98,7 @@ const Register = () => {
 					REGISTER
 				</Button>
 			</form>
-			<Link className="bottom-link" to="/login">
-				<Button>Login</Button>
-			</Link>
+			
 		</div>
 	);
 };
