@@ -68,5 +68,6 @@ export const getPriceSuggestion = (property, history) => dispatch =>{
 		})
 		.catch(err =>{
 			console.log({err});
+			//TODO: handle Error 
 		})
 }
