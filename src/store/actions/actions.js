@@ -21,6 +21,7 @@ export const loginUser = (user, history) => dispatch =>{
 			history.push('/');
 		})
 		.catch( err => {
+			console.log(err.response);
 			//TODO: handle errors
 		})}
 

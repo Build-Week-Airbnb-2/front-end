@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Link} from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 import 'reset-css';
 import './styles/App.scss';
 
@@ -19,7 +19,6 @@ function App() {
     <Switch> 
       <Route path="/register" render={() => <Register />} />
       <Route path="/login" render={() => <Login />} />
-      
       <PrivateRoute path='/add-property'>
         <AddProperty />
       </PrivateRoute>
