@@ -32,6 +32,7 @@ export const loginUser = (user, history) => dispatch =>{
 		})
 		.catch( err => {
 			console.log(err.response);
+			dispatch({type: 'ERROR', payload: err.response})
 			//TODO: handle errors
 		})}
 

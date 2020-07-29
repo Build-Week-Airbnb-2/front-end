@@ -51,6 +51,11 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         loading: false
       }
+      case 'ERROR':
+        return {
+          ...state,
+          error: action.payload.data.message
+        }
     default:
       return state;
   }
