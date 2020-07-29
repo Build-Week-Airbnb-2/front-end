@@ -7,7 +7,7 @@ import Property from './Property'
 
 function PropertyList() {
   const listings = useSelector( state => state.listings) //array with all the listings
-  console.log('listings', listings); 
+  // console.log('listings', listings); 
   return (
     <div className="container">
       {

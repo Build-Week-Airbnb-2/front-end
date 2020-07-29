@@ -1,15 +1,16 @@
 import React,{useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { FormControl, Input, Typography as Text, Button } from '@material-ui/core';
 import {loginUser} from '../../../store/actions/actions'
 import { TextField } from '@material-ui/core';
 
+//change
 export default ({comparePassword})=>{
     const dispatch = useDispatch();
     const history = useHistory();
     const [userInput, setuserInput] = useState({email: '', password: ''});
-
+    const error = useSelector(state => state.error);
 
 // handling user input 
 const onChangeHandler = (e)=>{
@@ -21,8 +22,7 @@ const onChangeHandler = (e)=>{
 const onSubmitHandler =(e)=>{
     e.preventDefault();
     console.log('Submitted')
-//    dispatch(loginUser(userInput, history))
-// comparePassword(userInput)
+   dispatch(loginUser(userInput, history))
 }
 
  let [errors, setErrors] = useState(userInput);

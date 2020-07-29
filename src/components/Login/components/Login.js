@@ -6,8 +6,6 @@ import {
   useHistory,
 } from "react-router-dom";
 import Login from "./Log";
-import Register from "./Register";
-import Welcome from "./Welcome";
 
 export default () => {
   // 'database' for users and their passwords
