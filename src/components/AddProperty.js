@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector} from 'react-redux'
-import {getPriceSuggestion, addListing} from '../store/actions/actions'
-import Lottie from 'react-lottie';
-import animationData from '../assets/lotties/spinner.json'
+import { useDispatch, useSelector } from "react-redux";
+import { getPriceSuggestion, addListing } from "../store/actions/actions";
+import Lottie from "react-lottie";
+import animationData from "../assets/lotties/spinner.json";
 
 // const initialFormValues = {
 //   host_about_len: '',
@@ -29,41 +29,43 @@ import animationData from '../assets/lotties/spinner.json'
 // };
 
 const initialFormValues = {
-  host_about_len: 'My wife and I own this house and rent out the guest rooms on weekends',
-  description_len: 'A quiet house in north seattle',
-  property_type: 'House',
-  neighbourhood: 'Silver Lake',
-  city: 'Everett',
-  state: 'WA',
-  zipcode: '98208',
+  host_about_len:
+    "My wife and I own this house and rent out the guest rooms on weekends",
+  description_len: "A quiet house in north seattle",
+  property_type: "House",
+  neighbourhood: "Silver Lake",
+  city: "Everett",
+  state: "WA",
+  zipcode: "98208",
   bathrooms: 1.75,
   bedrooms: 3,
   beds: 6,
   accommodates: 6,
   guests_included: 2,
-  square_feet: '1200',
-  cancellation_policy: 'moderate',
-  instant_bookable: 't',
-  is_business_travel_ready: 'f',
+  square_feet: "1200",
+  cancellation_policy: "moderate",
+  instant_bookable: "t",
+  is_business_travel_ready: "f",
   review_scores_rating: 90,
   number_of_reviews: 4,
-  transit_len: 'There is a bus stop at the end of the street!',
-  name: 'Silver Lake House',
+  transit_len: "There is a bus stop at the end of the street!",
+  name: "Silver Lake House",
 };
 
+//lottie file options
 const defaultOptions = {
   loop: true,
   autoplay: true,
   animationData: animationData,
   rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice"
-  }
+    preserveAspectRatio: "xMidYMid slice",
+  },
 };
 
 export default function AddProperty() {
   const [formValues, setFormValues] = useState(initialFormValues);
-   const dispatch = useDispatch();
-   const loading = useSelector(state => state.loading);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loading);
   const history = useHistory();
 
   const changeHandler = (e) => {
@@ -75,13 +77,12 @@ export default function AddProperty() {
 
   const addProperty = (e) => {
     e.preventDefault();
-    
-    dispatch(addListing(formValues,history))
+
+    dispatch(addListing(formValues, history));
     // getting price suggestion from DS Model
-    // dispatch(getPriceSuggestion(formValues, history))
+    // dispatch(getPriceSuggestion(formValues, history));
 
     setFormValues(initialFormValues);
-    
   };
 
   return (
@@ -260,7 +261,7 @@ export default function AddProperty() {
           />
         </label>
         <label>
-          transit 
+          transit
           <input
             type="text"
             name="transit_len"
@@ -268,15 +269,16 @@ export default function AddProperty() {
             value={formValues.transit_len}
           />
         </label>
-        { !loading 
-          ? <button>Add Property</button>
-          :<Lottie 
-          className='loading'
-          options={defaultOptions}
+        {!loading ? (
+          <button>Add Property</button>
+        ) : (
+          <Lottie
+            className="loading"
+            options={defaultOptions}
             height={100}
             width={100}
           />
-        }
+        )}
       </form>
     </div>
   );
