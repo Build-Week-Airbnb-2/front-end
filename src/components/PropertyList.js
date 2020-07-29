@@ -6,13 +6,13 @@ import {useSelector} from 'react-redux'
 import Property from './Property'
 
 function PropertyList() {
-  const propeties = useSelector( state => state.properties)
+  const listings = useSelector( state => state.listings) //array with all the listings
+  console.log('listings', listings); 
   return (
     <div>
-      <h1>This is a Property List</h1>
       {
-        propeties.map(property =>{
-          return <Property property={property} />
+        listings.map(property =>{
+          return <Property key={property.id} property={property} />
         })
       }
     </div>
