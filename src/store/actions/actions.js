@@ -1,5 +1,13 @@
 import axios from 'axios'
 import {axiosWithAuth} from '../../utils/axiosWithAuth'
+import {Redirect} from 'react-router-dom'
+
+
+
+// ====== APP Actions ======
+
+export const DATA_LOADING = 'DATA_LOADING'
+
 
 // ======= USER ACTIONS ========
 
@@ -40,6 +48,7 @@ export const checkLogIn = () =>{
 	if(item){
 		return {type: USER_IS_LOGGED_IN}
 	}
+	  return {type: 'USER_IS_NOT_LOGGED_IN'}
 }
 
 		// ====== CRUD OPERATIONS ======
@@ -47,21 +56,39 @@ export const checkLogIn = () =>{
 		// == READ ==
 export const GET_LISTINGS = 'GET_LISTINGS';
 
-export const getProperties = () => dispatch => {
-	console.log('listings actions file');
+export const getProperties = (history) => dispatch => {
 	axiosWithAuth()
 		.get('/api/listings')
 		.then(res =>{
 			// listings array at res.data.listings 
-			console.log(res);
+			// console.log(res);
 			dispatch({type: GET_LISTINGS, payload: {listings: res.data.listings}})
 		})
 		.catch(err =>{
-			console.log(err);
+			console.log(err.response);
+			if(err.response.data.token === 'invalid token'){
+				console.log('invalid token, logging you out');
+				window.localStorage.removeItem('token')
+				history.push('/login')
+			}
 		})
 }
 
 // === CREATE ====
+export const ADDED_LISTING = 'ADDED_LISTING'
+export const addListing = (property,history) => dispatch =>{
+	console.log('adding listing to BE');
+	dispatch({type: DATA_LOADING})
+	axiosWithAuth()
+		.post('/api/listings', property)
+			.then(res=>{
+				dispatch({type: ADDED_LISTING})
+				history.push('/')
+			})
+			.catch(err =>{
+				console.log(err.response);
+			})
+}
 
 
 
@@ -86,7 +113,7 @@ export const getPriceSuggestion = (property, history) => dispatch =>{
 			history.push('/')
 		})
 		.catch(err =>{
-			console.log({err});
+			console.log(err.response);
 			//TODO: handle Error 
 		})
 }

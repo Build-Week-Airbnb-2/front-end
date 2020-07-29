@@ -5,12 +5,15 @@ import {
   LOG_IN,
   USER_IS_LOGGED_IN,
   GET_LISTINGS,
+  DATA_LOADING,
+  ADDED_LISTING
 } from "../actions/actions";
 
 export const initialState = {
   listings: [],
   error: "",
   loggedIn: false,
+  loading: false,
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -35,8 +38,19 @@ export const rootReducer = (state = initialState, action) => {
     case GET_LISTINGS:
         return{
             ...state,
-            listings: action.payload.listings
+            listings: action.payload.listings,
+            loading: false
         }
+    case DATA_LOADING:
+      return {
+        ...state,
+        loading: true
+      }
+    case ADDED_LISTING:
+      return {
+        ...state,
+        loading: false
+      }
     default:
       return state;
   }
