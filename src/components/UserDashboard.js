@@ -1,20 +1,23 @@
 import React,{useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {getProperties} from '../store/actions/actions'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 
 import PropertyList from './PropertyList'
 
  function UserDashboard(props) {
+   const listings = useSelector(state => state.listings);
+   const dispatch = useDispatch()
 
   useEffect(()=>{
-    getProperties()
-  })
+    //dispatch action from redux
+    dispatch(getProperties())
+  },[])
 
   return (
     <div className='user-dashboard'>
       <h1>Airbnb pricing calculator</h1>
-      {!props.hasProperties && (
+      {listings.length < 1 && (
         <div className='user-dashboard-empty'>
           <h2>Looks like you don´t have any properties.</h2>
           <h2>Please Import a Property to see our pricing suggestion</h2>
@@ -22,7 +25,7 @@ import PropertyList from './PropertyList'
         </div>
       )}
       {
-        props.hasProperties && (
+        listings.length >= 1 && (
           <PropertyList />
         )
       }
@@ -31,10 +34,4 @@ import PropertyList from './PropertyList'
 }
 
 
-function mapStateToProps(state){
-  return{
-    hasProperties: state.hasProperties
-  }
-}
-
-export default connect(mapStateToProps,{getProperties})(UserDashboard);
+export default UserDashboard;

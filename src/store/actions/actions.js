@@ -1,5 +1,5 @@
 import axios from 'axios'
-import axiosWithAuth from '../../utils/axiosWithAuth'
+import {axiosWithAuth} from '../../utils/axiosWithAuth'
 
 // ======= USER ACTIONS ========
 
@@ -20,7 +20,7 @@ export const loginUser = (user, history) => dispatch =>{
 		.then(res => {
 			window.localStorage.setItem('token', JSON.stringify(res.data.token));
 			history.push('/');
-			return {type: LOG_IN} // BUG: not hitting this action
+			dispatch({type: LOG_IN}) 
 		})
 		.catch( err => {
 			console.log(err.response);
@@ -45,18 +45,20 @@ export const checkLogIn = () =>{
 		// ====== CRUD OPERATIONS ======
 
 		// == READ ==
-export const GET_PROPERTIES = 'GET_PROPERTIES'
-export const getProperties = () => {
-	console.log('getting properties actions file');
-	//TODO: Get properties from endpoint, set propeties to state in reducer
-	// axiosWithAuth()
-	// 	.get()
-	// 	.then(res =>{
-	// 		console.log(res);
-	// 	})
-	// 	.catch(err =>{
-	// 		console.log(err);
-	// 	})
+export const GET_LISTINGS = 'GET_LISTINGS';
+
+export const getProperties = () => dispatch => {
+	console.log('listings actions file');
+	axiosWithAuth()
+		.get('/api/listings')
+		.then(res =>{
+			// listings array at res.data.listings 
+			console.log(res);
+			dispatch({type: GET_LISTINGS, payload: {listings: res.data.listings}})
+		})
+		.catch(err =>{
+			console.log(err);
+		})
 }
 
 // === CREATE ====
