@@ -1,6 +1,9 @@
-import React from 'react'
+import React from 'react';
+import {useHistory} from 'react-router-dom';
 
 function Property({property}) {
+  const history = useHistory();
+
   return (
     <div>
       <h5>Name</h5>
@@ -15,6 +18,8 @@ function Property({property}) {
       <p>{property.bathrooms}</p>
       <h5>Type</h5>
       <p>{property.property_type}</p>
+      <button onClick={()=>history.push(`/update-property/${property.id}`)}>Update</button>
+      <button>Delete</button>
     </div>
   )
 }

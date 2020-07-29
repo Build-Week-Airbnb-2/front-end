@@ -7,6 +7,7 @@ import {Redirect} from 'react-router-dom'
 // ====== APP Actions ======
 
 export const DATA_LOADING = 'DATA_LOADING'
+export const ERROR = 'ERROR'
 
 
 // ======= USER ACTIONS ========
@@ -18,8 +19,8 @@ export const registerUser = (user, history) => dispatch => {
 			history.push('/login')
 		})
 		.catch( err => {
-			console.log(err);
-			//TODO: handle errors
+			console.log(err.response);
+				dispatch({type: ERROR, payload:{error: err.response}})
 		})}
 
 export const LOG_IN = 'LOG_IN'		
@@ -32,7 +33,7 @@ export const loginUser = (user, history) => dispatch =>{
 		})
 		.catch( err => {
 			console.log(err.response);
-			//TODO: handle errors
+			dispatch({type: ERROR, payload:{error: err.response}})
 		})}
 
 export const LOG_OUT = 'LOG_OUT'
@@ -68,9 +69,21 @@ export const getProperties = (history) => dispatch => {
 			console.log(err.response);
 			if(err.response.data.token === 'invalid token'){
 				console.log('invalid token, logging you out');
-				window.localStorage.removeItem('token')
+				dispatch({type: LOG_OUT})
 				history.push('/login')
 			}
+		})
+}
+
+export const GET_LISTING = 'GET_LISTING';
+export const getProperty = ()=> dispatch=>{
+	axiosWithAuth()
+	.get()
+		.then(res=>{
+			console.log(res);
+		})
+		.catch(err =>{
+			console.log(err.response);
 		})
 }
 
@@ -98,6 +111,17 @@ export const addListing = (property,history) => dispatch =>{
 
 // ===== DESTROY =====
 
+export const DELETE_LISTING = 'DELETE_LISTING'
+export const deleteListing = (id) => dispatch=>{
+	axiosWithAuth()
+		.delete(`/api/listings/${id}`)
+		.then(res=>{
+			console.log(res);
+		})
+		.catch(err=>{
+			console.log(err.response);
+		})
+}
 
 
 
