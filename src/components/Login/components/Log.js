@@ -20,7 +20,8 @@ const onChangeHandler = (e)=>{
 // handling a submission 
 const onSubmitHandler =(e)=>{
     e.preventDefault();
-   dispatch(loginUser(userInput, history))
+    console.log('Submitted')
+//    dispatch(loginUser(userInput, history))
 // comparePassword(userInput)
 }
 
@@ -39,7 +40,6 @@ const onSubmitHandler =(e)=>{
                         label="email"
                         onChange={onChangeHandler}
                     />
-                    {errors.email.length ? <p>{errors.email}</p> : null}
                 </div>
 
                 <div className="field-container">
@@ -51,7 +51,6 @@ const onSubmitHandler =(e)=>{
                         label="password"
                         onChange={onChangeHandler}
                     />
-                    {errors.password.length ? <p>{errors.password}</p> : null}
                 </div>
                 <Button type="submit" variant="contained" color="secondary">
                     Login
