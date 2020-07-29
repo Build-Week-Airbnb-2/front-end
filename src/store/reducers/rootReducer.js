@@ -6,20 +6,26 @@ import {
   USER_IS_LOGGED_IN,
   GET_LISTINGS,
   DATA_LOADING,
-  ADDED_LISTING
+  ADDED_LISTING,
+  DELETE_LISTING,
+  ERROR
 } from "../actions/actions";
 
 export const initialState = {
   listings: [],
   error: "",
   loggedIn: false,
-  loading: false,
+  loading: false
 };
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ERROR:
+      return{
+        ...state,
+        error: action.payload.error
+      }
     case LOG_IN:
-      console.log("Logged in Reducer");
       return {
         ...state,
         loggedIn: true,
@@ -51,6 +57,11 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         loading: false
       }
+      case DELETE_LISTING:
+        return{
+          ...state,
+          listings: state.listings.filter(item => item.id !== action.payload.id)
+        }
       case 'ERROR':
         return {
           ...state,
