@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProperty } from "../store/actions/actions";
+import {  updateListing } from "../store/actions/actions";
+import { axiosWithAuth }from '../utils/axiosWithAuth'
 import Lottie from "react-lottie";
 import animationData from "../assets/lotties/spinner.json";
 
@@ -56,9 +57,20 @@ export default function AddProperty() {
     });
   };
 
+  const sumbitHandler =(e) =>{
+    e.preventDefault()
+    dispatch(updateListing(id, formValues, history))
+  }
+
   useEffect(()=> {
-    //BUG: If user refreshed page, there are no listings
-    dispatch(getProperty(id))
+    axiosWithAuth()
+    .get(`/api/listings/${id}`)
+    .then((res) => {
+      setFormValues(res.data.listing)
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
   },[])
 
  
@@ -67,7 +79,7 @@ export default function AddProperty() {
   return (
     <div className="add-property-form">
       <h1>Add property component</h1>
-      <form >
+      <form onSubmit={sumbitHandler} >
         <label>
           Name
           <input
@@ -249,7 +261,7 @@ export default function AddProperty() {
           />
         </label>
         {!loading ? (
-          <button>Add Property</button>
+          <button>Update Property</button>
         ) : (
           <Lottie
             className="loading"

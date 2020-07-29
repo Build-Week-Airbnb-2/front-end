@@ -26,7 +26,6 @@ export const rootReducer = (state = initialState, action) => {
         error: action.payload.error
       }
     case LOG_IN:
-      console.log("Logged in Reducer");
       return {
         ...state,
         loggedIn: true,
