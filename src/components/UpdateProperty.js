@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProperties } from "../store/actions/actions";
+import { getProperty } from "../store/actions/actions";
 import Lottie from "react-lottie";
 import animationData from "../assets/lotties/spinner.json";
 
@@ -58,9 +58,7 @@ export default function AddProperty() {
 
   useEffect(()=> {
     //BUG: If user refreshed page, there are no listings
-    console.log(listings);
-    const listing = listings.filter( item => item.id == id)
-    setFormValues(listing)
+    dispatch(getProperty(id))
   },[])
 
  

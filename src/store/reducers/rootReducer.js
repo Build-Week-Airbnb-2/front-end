@@ -7,6 +7,7 @@ import {
   GET_LISTINGS,
   DATA_LOADING,
   ADDED_LISTING,
+  DELETE_LISTING,
   ERROR
 } from "../actions/actions";
 
@@ -57,6 +58,11 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         loading: false
       }
+      case DELETE_LISTING:
+        return{
+          ...state,
+          listings: state.listings.filter(item => item.id !== action.payload.id)
+        }
     default:
       return state;
   }

@@ -76,9 +76,9 @@ export const getProperties = (history) => dispatch => {
 }
 
 export const GET_LISTING = 'GET_LISTING';
-export const getProperty = ()=> dispatch=>{
+export const getProperty = (id)=> dispatch=>{
 	axiosWithAuth()
-	.get()
+	.get(`/api/listing/${id}`)
 		.then(res=>{
 			console.log(res);
 		})
@@ -90,7 +90,6 @@ export const getProperty = ()=> dispatch=>{
 // === CREATE ====
 export const ADDED_LISTING = 'ADDED_LISTING'
 export const addListing = (property,history) => dispatch =>{
-	console.log('adding listing to BE');
 	dispatch({type: DATA_LOADING})
 	axiosWithAuth()
 		.post('/api/listings', property)
@@ -112,11 +111,13 @@ export const addListing = (property,history) => dispatch =>{
 // ===== DESTROY =====
 
 export const DELETE_LISTING = 'DELETE_LISTING'
-export const deleteListing = (id) => dispatch=>{
+export const deleteListing = (id, history) => dispatch=>{
 	axiosWithAuth()
 		.delete(`/api/listings/${id}`)
 		.then(res=>{
-			console.log(res);
+			console.log('property deleted');
+			dispatch({type: DELETE_LISTING, payload: {id: id}})
+			history.push('/')
 		})
 		.catch(err=>{
 			console.log(err.response);

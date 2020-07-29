@@ -26,6 +26,7 @@ const defaultOptions = {
 
   useEffect(()=>{
     //dispatch action from redux
+
     dispatch(getProperties(history))
   },[])
 
