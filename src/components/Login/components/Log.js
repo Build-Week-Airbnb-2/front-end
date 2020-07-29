@@ -35,7 +35,7 @@ const onSubmitHandler =(e)=>{
            } }>
         
         
-         {error && <div>{error}</div> }
+         {error && <div>{error.data.message}</div> }
             <FormControl >
             
             <Text>Don't have an Acount? <br/>
