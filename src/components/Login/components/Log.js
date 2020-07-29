@@ -1,14 +1,15 @@
 import React,{useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { FormControl, Input, Typography as Text, Button } from '@material-ui/core';
 import {loginUser} from '../../../store/actions/actions'
 
+//change
 export default ({comparePassword})=>{
     const dispatch = useDispatch();
     const history = useHistory();
     const [userInput, setuserInput] = useState({email: '', password: ''});
-
+    const error = useSelector(state => state.error);
 
 // handling user input 
 const onChangeHandler = (e)=>{
@@ -29,20 +30,17 @@ const onSubmitHandler =(e)=>{
          justifyContent: 'center',
           marginTop: '15%',
            marginLeft: '38%',
-           borderTop: 'dashed 1px red',
-           borderBottom: 'dashed 1px blue',
-           borderRight: 'dashed 1px black',
-           borderLeft: 'dashed 1px black',
            width: "24%",
-           boxShadow: '10px 10px 8px #888888'
+           boxShadow: '7px 7px 8px 8px #888888'
            } }>
         
         
-              
+         {error && <div>{error}</div> }
             <FormControl >
+            
             <Text>Don't have an Acount? <br/>
            <span style={{marginLeft: '30px'}}>
-           <Link style={{textDecoration: 'none'}} to='/'>
+           <Link style={{textDecoration: 'none'}} to='/register'>
            <Button color="primary" variant="outlined" size="medium">Register</Button></Link>
             </span>
            </Text>

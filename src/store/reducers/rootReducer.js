@@ -62,6 +62,11 @@ export const rootReducer = (state = initialState, action) => {
           ...state,
           listings: state.listings.filter(item => item.id !== action.payload.id)
         }
+      case 'ERROR':
+        return {
+          ...state,
+          error: action.payload.data.message
+        }
     default:
       return state;
   }
