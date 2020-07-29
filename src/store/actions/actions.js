@@ -2,6 +2,13 @@ import axios from 'axios'
 import {axiosWithAuth} from '../../utils/axiosWithAuth'
 import {Redirect} from 'react-router-dom'
 
+
+
+// ====== APP Actions ======
+
+export const DATA_LOADING = 'DATA_LOADING'
+
+
 // ======= USER ACTIONS ========
 
 export const registerUser = (user, history) => dispatch => {
@@ -50,7 +57,6 @@ export const checkLogIn = () =>{
 export const GET_LISTINGS = 'GET_LISTINGS';
 
 export const getProperties = (history) => dispatch => {
-	//TODO: handle Loading Data, Display Spinner
 	axiosWithAuth()
 		.get('/api/listings')
 		.then(res =>{
@@ -69,12 +75,14 @@ export const getProperties = (history) => dispatch => {
 }
 
 // === CREATE ====
+export const ADDED_LISTING = 'ADDED_LISTING'
 export const addListing = (property,history) => dispatch =>{
 	console.log('adding listing to BE');
+	dispatch({type: DATA_LOADING})
 	axiosWithAuth()
 		.post('/api/listings', property)
 			.then(res=>{
-				alert('added new listing!')
+				dispatch({type: ADDED_LISTING})
 				history.push('/')
 			})
 			.catch(err =>{

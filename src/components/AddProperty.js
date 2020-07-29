@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch} from 'react-redux'
-
+import { useDispatch, useSelector} from 'react-redux'
 import {getPriceSuggestion, addListing} from '../store/actions/actions'
+import Lottie from 'react-lottie';
+import animationData from '../assets/lotties/spinner.json'
 
 // const initialFormValues = {
 //   host_about_len: '',
@@ -50,9 +51,19 @@ const initialFormValues = {
   name: 'Silver Lake House',
 };
 
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice"
+  }
+};
+
 export default function AddProperty() {
   const [formValues, setFormValues] = useState(initialFormValues);
    const dispatch = useDispatch();
+   const loading = useSelector(state => state.loading);
   const history = useHistory();
 
   const changeHandler = (e) => {
@@ -257,7 +268,15 @@ export default function AddProperty() {
             value={formValues.transit_len}
           />
         </label>
-        <button>Add Property</button>
+        { !loading 
+          ? <button>Add Property</button>
+          :<Lottie 
+          className='loading'
+          options={defaultOptions}
+            height={100}
+            width={100}
+          />
+        }
       </form>
     </div>
   );
