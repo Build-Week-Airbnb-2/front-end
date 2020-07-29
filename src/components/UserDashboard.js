@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {getProperties} from '../store/actions/actions'
 import { connect, useDispatch, useSelector } from 'react-redux'
 
@@ -8,10 +8,11 @@ import PropertyList from './PropertyList'
  function UserDashboard(props) {
    const listings = useSelector(state => state.listings);
    const dispatch = useDispatch()
+   const history = useHistory()
 
   useEffect(()=>{
     //dispatch action from redux
-    dispatch(getProperties())
+    dispatch(getProperties(history))
   },[])
 
   return (

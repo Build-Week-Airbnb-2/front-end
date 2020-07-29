@@ -2,32 +2,52 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch} from 'react-redux'
 
-import {getPriceSuggestion} from '../store/actions/actions'
+import {getPriceSuggestion, addListing} from '../store/actions/actions'
 
 // const initialFormValues = {
-//   name: "",
-//   summary: "",
-//   city: "",
-//   state: "",
-//   country: "",
-//   bathrooms: "",
-//   bedrooms: "",
-//   beds: "",
-//   cancellation_policy: "",
-//   cleaning_fee: "",
+//   host_about_len: '',
+//   description_len: '',
+//   property_type: '',
+//   neighbourhood: '',
+//   city: '',
+//   state: '',
+//   zipcode: '',
+//   bathrooms: '',
+//   bedrooms: '',
+//   beds: '',
+//   accommodates: '',
+//   guests_included: '',
+//   square_feet: '',
+//   cancellation_policy: '',
+//   instant_bookable: '',
+//   is_business_travel_ready: '',
+//   review_scores_rating: '',
+//   number_of_reviews:'' ,
+//   transit_len: '',
+//   name: '',
 // };
 
 const initialFormValues = {
-  name: " My Seattle Home",
-  summary: "A quiet house in north seattle",
-  city: " Everret",
-  state: "WA",
-  country: "United States",
+  host_about_len: 'My wife and I own this house and rent out the guest rooms on weekends',
+  description_len: 'A quiet house in north seattle',
+  property_type: 'House',
+  neighbourhood: 'Silver Lake',
+  city: 'Everett',
+  state: 'WA',
+  zipcode: '98208',
   bathrooms: 1.75,
   bedrooms: 3,
   beds: 6,
-  cancellation_policy: "moderate",
-  cleaning_fee: "$15.00",
+  accommodates: 6,
+  guests_included: 2,
+  square_feet: '1200',
+  cancellation_policy: 'moderate',
+  instant_bookable: 't',
+  is_business_travel_ready: 'f',
+  review_scores_rating: 90,
+  number_of_reviews: 4,
+  transit_len: 'There is a bus stop at the end of the street!',
+  name: 'Silver Lake House',
 };
 
 export default function AddProperty() {
@@ -44,10 +64,10 @@ export default function AddProperty() {
 
   const addProperty = (e) => {
     e.preventDefault();
-    // TODO: add property to backend endpoint 
-
+    
+    dispatch(addListing(formValues,history))
     // getting price suggestion from DS Model
-    dispatch(getPriceSuggestion(formValues, history))
+    // dispatch(getPriceSuggestion(formValues, history))
 
     setFormValues(initialFormValues);
     
@@ -67,16 +87,43 @@ export default function AddProperty() {
           />
         </label>
         <label>
-          Summary
+          Description
           <input
             type="text"
-            name="summary"
+            name="description"
             onChange={changeHandler}
-            value={formValues.summary}
+            value={formValues.description_len}
           />
         </label>
         <label>
-          city
+          Property Type
+          <input
+            type="text"
+            name="property_type"
+            onChange={changeHandler}
+            value={formValues.property_type}
+          />
+        </label>
+        <label>
+          About Host
+          <input
+            type="text"
+            name="host_about_len"
+            onChange={changeHandler}
+            value={formValues.host_about_len}
+          />
+        </label>
+        <label>
+          Neighbourhood
+          <input
+            type="text"
+            name="neighbourhood"
+            onChange={changeHandler}
+            value={formValues.neighbourhood}
+          />
+        </label>
+        <label>
+          City
           <input
             type="text"
             name="city"
@@ -85,7 +132,7 @@ export default function AddProperty() {
           />
         </label>
         <label>
-          state
+          State
           <input
             type="text"
             name="state"
@@ -94,34 +141,70 @@ export default function AddProperty() {
           />
         </label>
         <label>
-          country
+          zipcode
           <input
             type="text"
-            name="country"
+            name="zipcode"
             onChange={changeHandler}
-            value={formValues.country}
+            value={formValues.zipcode}
           />
         </label>
         <label>
           bathrooms
           <input
-            type="text"
+            type="number"
             name="bathrooms"
             onChange={changeHandler}
             value={formValues.bathrooms}
           />
         </label>
         <label>
+          bedrooms
+          <input
+            type="number"
+            name="bedrooms"
+            onChange={changeHandler}
+            value={formValues.bedrooms}
+          />
+        </label>
+        <label>
           beds
           <input
-            type="text"
+            type="number"
             name="beds"
             onChange={changeHandler}
             value={formValues.beds}
           />
         </label>
         <label>
-          cancellation_policy
+          accommodates
+          <input
+            type="number"
+            name="accommodates"
+            onChange={changeHandler}
+            value={formValues.accommodates}
+          />
+        </label>
+        <label>
+          guests included
+          <input
+            type="number"
+            name="guests_included"
+            onChange={changeHandler}
+            value={formValues.guests_included}
+          />
+        </label>
+        <label>
+          square feet
+          <input
+            type="text"
+            name="square_feet"
+            onChange={changeHandler}
+            value={formValues.square_feet}
+          />
+        </label>
+        <label>
+          cancellation policy
           <input
             type="text"
             name="cancellation_policy"
@@ -130,12 +213,48 @@ export default function AddProperty() {
           />
         </label>
         <label>
-          cleaning_fee
+          instant bookable
           <input
             type="text"
-            name="cleaning_fee"
+            name="instant_bookable"
             onChange={changeHandler}
-            value={formValues.cleaning_fee}
+            value={formValues.instant_bookable}
+          />
+        </label>
+        <label>
+          business travel ready
+          <input
+            type="text"
+            name="is_business_travel_ready"
+            onChange={changeHandler}
+            value={formValues.is_business_travel_ready}
+          />
+        </label>
+        <label>
+          review scores rating
+          <input
+            type="number"
+            name="review_scores_rating"
+            onChange={changeHandler}
+            value={formValues.review_scores_rating}
+          />
+        </label>
+        <label>
+          number of reviews
+          <input
+            type="number"
+            name="number_of_reviews"
+            onChange={changeHandler}
+            value={formValues.number_of_reviews}
+          />
+        </label>
+        <label>
+          transit 
+          <input
+            type="text"
+            name="transit_len"
+            onChange={changeHandler}
+            value={formValues.transit_len}
           />
         </label>
         <button>Add Property</button>
