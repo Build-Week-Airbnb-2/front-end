@@ -111,7 +111,7 @@ function Property({ property }) {
 				title={`${name} (${property_type})`}
         subheader={`${beds} beds - ${bedrooms} Bedrooms - ${bathrooms} bathrooms`}
 			/>
-			{ price && <CardHeader title={`Price Suggestion ${price}`} ></CardHeader> }
+			{ price && <CardHeader title={`Price Suggestion $${price}`} ></CardHeader> }
 			<CardMedia
 				className="property-image"
 				image="https://images.unsplash.com/photo-1593456552723-eeb2041c434e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
