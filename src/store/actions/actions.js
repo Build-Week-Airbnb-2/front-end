@@ -18,7 +18,7 @@ export const registerUser = (user, history) => (dispatch) => {
     })
     .catch((err) => {
       console.log(err.response);
-      dispatch({ type: ERROR, payload: { error: err.response } });
+      dispatch({ type: ERROR, payload: { error: err.response.statusText } });
     });
 };
 
@@ -126,17 +126,12 @@ export const deleteListing = (id, history) => (dispatch) => {
 
 // ======= DS MODEL OPERATIONS =======
 
-export const getPriceSuggestion = (property, history) => (dispatch) => {
-  axios
-    .post("https://ds-bw-airbnb-2.herokuapp.com/predict", property)
-    .then((res) => {
-      console.log(res);
-      alert(`Suggested Price ${res.data.predicted_price}`);
-      // predicted price res.data.predicted_price
-      history.push("/");
-    })
-    .catch((err) => {
-      console.log(err.response);
-      //TODO: handle Error
-    });
-};
+export const analyzeProperty = (property) => dispatch => {
+  axios.post('https://ds-bw-airbnb-2.herokuapp.com/predict',property)
+			.then(res=>{
+				console.log(res);
+			})
+			.catch(err =>{
+				console.log(err);
+			})
+}

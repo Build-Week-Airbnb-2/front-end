@@ -102,7 +102,7 @@ export default function AddProperty() {
           Description
           <input
             type="text"
-            name="description"
+            name="description_len"
             onChange={changeHandler}
             value={formValues.description_len}
           />

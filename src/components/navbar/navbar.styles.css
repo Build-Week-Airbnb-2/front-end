@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 
+
+
+
 #nav-links {
 	width: 100%;
 	display: flex;
@@ -13,6 +16,7 @@
 }
 
 #icon{
-    font-family: 'Yellowtail', cursive;
+    font-family: 'Airbnb Cereal App Extra Bold'
 }
+
 
