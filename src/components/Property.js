@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom';
 import {deleteListing} from '../store/actions/actions'
@@ -20,6 +20,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import axios from 'axios'
+
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -50,15 +52,51 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
+
+// const values = {
+//   host_about_len: 'My wife and I own this house and rent out the guest rooms on weekends',
+//   description_len: 'A quiet house in north seattle',
+//   property_type: 'House',
+//   neighbourhood: 'Silver Lake',
+//   city: 'Everett',
+//   state: 'WA',
+//   zipcode: '98208',
+//   bathrooms: 1.75,
+//   bedrooms: 3,
+//   beds: 6,
+//   accommodates: 6,
+//   guests_included: 2,
+//   square_feet: '1200',
+//   cancellation_policy: 'moderate',
+//   instant_bookable: 't',
+//   is_business_travel_ready: 'f',
+//   review_scores_rating: 90,
+//   number_of_reviews: 4,
+//   transit_len: 'There is a bus stop at the end of the street'
+// }
+
 function Property({ property }) {
 	const history = useHistory();
   const dispatch = useDispatch()
 	const classes = useStyles();
-	const [ expanded, setExpanded ] = React.useState(false);
+	const [ expanded, setExpanded ] = useState(false);
+	const [price, setPrice] = useState(null)
 
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
 	};
+
+	useEffect(()=>{
+			axios.post('https://ds-bw-airbnb-2.herokuapp.com/predict',property)
+					.then(res=>{
+						console.log(res);
+						setPrice(res.data.predicted_price)
+					})
+					.catch(err =>{
+						console.log(err.response);
+					})
+	},[])
 
 	const { name, beds, bedrooms, bathrooms, description_len, property_type } = property;
 
@@ -72,8 +110,8 @@ function Property({ property }) {
 				}
 				title={`${name} (${property_type})`}
         subheader={`${beds} beds - ${bedrooms} Bedrooms - ${bathrooms} bathrooms`}
-        
 			/>
+			{ price && <CardHeader title={`Price Suggestion ${price}`} ></CardHeader> }
 			<CardMedia
 				className="property-image"
 				image="https://images.unsplash.com/photo-1593456552723-eeb2041c434e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
@@ -84,7 +122,6 @@ function Property({ property }) {
 				<IconButton aria-label="add to favorites">
 					<FavoriteIcon />
 				</IconButton>
-
 				<IconButton
 					className={clsx(classes.expand, {
 						[classes.expandOpen]: expanded
