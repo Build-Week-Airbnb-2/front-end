@@ -18,7 +18,7 @@ export const registerUser = (user, history) => (dispatch) => {
     })
     .catch((err) => {
       console.log(err.response);
-      dispatch({ type: ERROR, payload: { error: err.response } });
+      dispatch({ type: ERROR, payload: { error: err.response.statusText } });
     });
 };
 
