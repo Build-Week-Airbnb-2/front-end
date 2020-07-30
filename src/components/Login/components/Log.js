@@ -23,6 +23,7 @@ const onSubmitHandler =(e)=>{
     e.preventDefault();
     console.log('Submitted')
    dispatch(loginUser(userInput, history))
+// comparePassword(userInput)
 }
 
  let [errors, setErrors] = useState(userInput);
@@ -41,7 +42,6 @@ const onSubmitHandler =(e)=>{
                         onChange={onChangeHandler}
                     />
                 </div>
-
                 <div className="field-container">
                     <TextField
                         className="password"
@@ -58,18 +58,22 @@ const onSubmitHandler =(e)=>{
             </form>
 
         </div>
+ 
+    )
+}
 
-        // <div style={{display: 'flex',
-        //  justifyContent: 'center',
-        //   marginTop: '15%',
-        //    marginLeft: '38%',
-        //    borderTop: 'dashed 1px red',
-        //    borderBottom: 'dashed 1px blue',
-        //    borderRight: 'dashed 1px black',
-        //    borderLeft: 'dashed 1px black',
-        //    width: "24%",
-        //    boxShadow: '10px 10px 8px #888888'
-        //    } }>
+// ===== sams old code ======
+ /* <div style={{display: 'flex',
+         justifyContent: 'center',
+          marginTop: '15%',
+           marginLeft: '38%',
+           borderTop: 'dashed 1px red',
+           borderBottom: 'dashed 1px blue',
+           borderRight: 'dashed 1px black',
+           borderLeft: 'dashed 1px black',
+           width: "24%",
+           boxShadow: '10px 10px 8px #888888'
+           } }>
         
         
               
@@ -90,7 +94,6 @@ const onSubmitHandler =(e)=>{
         //         </form>
         //     </FormControl>
            
-        // </div>
+        // </div> */
         
-    )
-}
+

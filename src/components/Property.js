@@ -1,4 +1,8 @@
 import React from 'react';
+import {useDispatch} from 'react-redux'
+import {useHistory} from 'react-router-dom';
+import {deleteListing} from '../store/actions/actions'
+
 import '../styles/components/property.styles.css';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -47,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Property({ property }) {
+	const history = useHistory();
+  const dispatch = useDispatch()
 	const classes = useStyles();
 	const [ expanded, setExpanded ] = React.useState(false);
 
@@ -96,22 +102,9 @@ function Property({ property }) {
           <Typography className={classes.typography} paragraph>{description_len}</Typography>
 				</CardContent>
 			</Collapse>
+			<button onClick={()=>history.push(`/update-property/${property.id}`)}>Update</button>
+      <button onClick={()=>dispatch(deleteListing(property.id,history))}>Delete</button>
 		</Card>
-		// <h2></h2>
-		// <div className='property'>
-		//   <h5>Name</h5>
-		//   <p>{property.name}</p>
-		//   <h5>Description</h5>
-		//   <p>{property.description_len}</p>
-		//   <h5>Beds</h5>
-		//   <p>{property.beds}</p>
-		//   <h5>Bedrooms</h5>
-		//   <p>{property.bedrooms}</p>
-		//   <h5>Bathrooms</h5>
-		//   <p>{property.bathrooms}</p>
-		//   <h5>Type</h5>
-		//   <p>{property.property_type}</p>
-		// </div>
 	);
 }
 
