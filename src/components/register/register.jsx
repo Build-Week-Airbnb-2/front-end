@@ -1,30 +1,34 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import Button from '@material-ui/core/Button';
-import { TextField} from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import * as Yup from 'yup';
-import {registerUser} from '../../store/actions/actions'
+import { registerUser } from '../../store/actions/actions';
+import './register.styles.css';
 
-//refactored code to include initialForm values instead of setting state each time 
+//refactored code to include initialForm values instead of setting state each time
 const initialFormValues = {
 	email: '',
-	password: ''
-}
-
+	password: '',
+	confirmPassword: ''
+};
 
 const Register = () => {
+	const error = useSelector(state => state.error);
 	const dispatch = useDispatch();
 	const history = useHistory();
 	let [ formValues, setFormValues ] = useState(initialFormValues);
 
 	const formSchema = Yup.object().shape({
 		email: Yup.string().email('Must be a valid email address.').required('Must include email address.'),
-		password: Yup.string().min(6, 'Passwords must be at least 6 characters long.').required('Password is Required')
+		password: Yup.string().min(6, 'Passwords must be at least 6 characters long.').required('Password is Required'),
+		confirmPassword: Yup.mixed()
+			.oneOf([ formValues.password ], 'passwords must match')
+			.required('Please confirm your password')
 	});
 
 	let [ errors, setErrors ] = useState(initialFormValues);
-
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -33,12 +37,20 @@ const Register = () => {
 			email: formValues.email.trim(),
 			password: formValues.password.trim()
 		};
-		dispatch(registerUser(newUser, history));
-
+		formSchema.isValid(formValues).then((valid) => {
+			if (valid) {
+				dispatch(registerUser(newUser, history));
+			} else if (!valid) {
+				alert('invalid form values');
+			}
+		});
 	};
 
 	const handleChange = (e) => {
 		e.persist();
+		// console.log(e.target.name)
+		console.log(errors);
+		console.log(formValues);
 		Yup.reach(formSchema, e.target.name)
 			.validate(e.target.value)
 			.then((valid) => {
@@ -81,13 +93,25 @@ const Register = () => {
 						label="password"
 						onChange={handleChange}
 					/>
+
 					{errors.password.length ? <p>{errors.password}</p> : null}
 				</div>
+				<div className="field-container">
+					<TextField
+						className="password"
+						type="password"
+						name="confirmPassword"
+						id="name"
+						label="confirm password"
+						onChange={handleChange}
+					/>
+					{errors.confirmPassword.length ? <p>{errors.confirmPassword}</p> : null}
+				</div>
+
 				<Button type="submit" variant="contained" color="secondary">
 					REGISTER
 				</Button>
 			</form>
-			
 		</div>
 	);
 };

@@ -6,6 +6,7 @@ import './styles/App.scss';
 //components
 import UserDashboard from './components/UserDashboard';
 import AddProperty from './components/AddProperty';
+import UpdateProperty from './components/UpdateProperty';
 import Register from './components/register/register';
 import Login from './components/Login/components/Log';
 import PrivateRoute from './components/PrivateComponent';
@@ -21,6 +22,9 @@ function App() {
       <Route path="/login" render={() => <Login />} />
       <PrivateRoute path='/add-property'>
         <AddProperty />
+      </PrivateRoute>
+      <PrivateRoute path='/update-property/:id'>
+        <UpdateProperty />
       </PrivateRoute>
       <PrivateRoute path='/'>
         <UserDashboard />

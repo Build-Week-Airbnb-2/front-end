@@ -1,56 +1,34 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getPriceSuggestion, addListing } from "../store/actions/actions";
+import {  updateListing } from "../store/actions/actions";
+import { axiosWithAuth }from '../utils/axiosWithAuth'
 import Lottie from "react-lottie";
 import animationData from "../assets/lotties/spinner.json";
 
-// const initialFormValues = {
-//   host_about_len: '',
-//   description_len: '',
-//   property_type: '',
-//   neighbourhood: '',
-//   city: '',
-//   state: '',
-//   zipcode: '',
-//   bathrooms: '',
-//   bedrooms: '',
-//   beds: '',
-//   accommodates: '',
-//   guests_included: '',
-//   square_feet: '',
-//   cancellation_policy: '',
-//   instant_bookable: '',
-//   is_business_travel_ready: '',
-//   review_scores_rating: '',
-//   number_of_reviews:'' ,
-//   transit_len: '',
-//   name: '',
-// };
-
 const initialFormValues = {
-  host_about_len:
-    "My wife and I own this house and rent out the guest rooms on weekends",
-  description_len: "A quiet house in north seattle",
-  property_type: "House",
-  neighbourhood: "Silver Lake",
-  city: "Everett",
-  state: "WA",
-  zipcode: "98208",
-  bathrooms: 1.75,
-  bedrooms: 3,
-  beds: 6,
-  accommodates: 6,
-  guests_included: 2,
-  square_feet: "1200",
-  cancellation_policy: "moderate",
-  instant_bookable: "t",
-  is_business_travel_ready: "f",
-  review_scores_rating: 90,
-  number_of_reviews: 4,
-  transit_len: "There is a bus stop at the end of the street!",
-  name: "Silver Lake House",
+  host_about_len: '',
+  description_len: '',
+  property_type: '',
+  neighbourhood: '',
+  city: '',
+  state: '',
+  zipcode: '',
+  bathrooms: '',
+  bedrooms: '',
+  beds: '',
+  accommodates: '',
+  guests_included: '',
+  square_feet: '',
+  cancellation_policy: '',
+  instant_bookable: '',
+  is_business_travel_ready: '',
+  review_scores_rating: '',
+  number_of_reviews:'' ,
+  transit_len: '',
+  name: '',
 };
+
 
 //lottie file options
 const defaultOptions = {
@@ -66,7 +44,11 @@ export default function AddProperty() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);
+  const listings = useSelector((state) => state.listings);
   const history = useHistory();
+  const { id } = useParams()
+
+  
 
   const changeHandler = (e) => {
     setFormValues({
@@ -75,20 +57,29 @@ export default function AddProperty() {
     });
   };
 
-  const addProperty = (e) => {
-    e.preventDefault();
+  const sumbitHandler =(e) =>{
+    e.preventDefault()
+    dispatch(updateListing(id, formValues, history))
+  }
 
-    dispatch(addListing(formValues, history));
-    // getting price suggestion from DS Model
-    // dispatch(getPriceSuggestion(formValues, history));
+  useEffect(()=> {
+    axiosWithAuth()
+    .get(`/api/listings/${id}`)
+    .then((res) => {
+      setFormValues(res.data.listing)
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+  },[])
 
-    setFormValues(initialFormValues);
-  };
+ 
+
 
   return (
     <div className="add-property-form">
       <h1>Add property component</h1>
-      <form onSubmit={addProperty}>
+      <form onSubmit={sumbitHandler} >
         <label>
           Name
           <input
@@ -270,7 +261,7 @@ export default function AddProperty() {
           />
         </label>
         {!loading ? (
-          <button>Add Property</button>
+          <button>Update Property</button>
         ) : (
           <Lottie
             className="loading"
