@@ -15,7 +15,7 @@ const initialFormValues = {
 };
 
 const Register = () => {
-	const error = useSelector((state) => state.error);
+	const error = useSelector((state) => state.error); //global error state
 	const dispatch = useDispatch();
 	const history = useHistory();
 	let [ formValues, setFormValues ] = useState(initialFormValues);
@@ -41,18 +41,14 @@ const Register = () => {
 			if (valid) {
 				dispatch(registerUser(newUser, history));
 			} else if (!valid) {
-				alert('invalid form values');
+				// setting global error
+				dispatch({ type: 'ERROR', payload: { error: 'Please Fill Out All Fields' } });
 			}
 		});
 	};
 
 	const handleChange = (e) => {
 		e.persist();
-		// console.log(e.target.name)
-		console.log(errors);
-		console.log(formValues);
-		
-		// Validate each input and set errors
 		Yup.reach(formSchema, e.target.name)
 			.validate(e.target.value)
 			.then((valid) => {
@@ -113,6 +109,8 @@ const Register = () => {
 				<Button type="submit" variant="contained" color="secondary">
 					REGISTER
 				</Button>
+				{/* displaying global error */}
+				{error && <p>{error}</p>}
 			</form>
 		</div>
 	);

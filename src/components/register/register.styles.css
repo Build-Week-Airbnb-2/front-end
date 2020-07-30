@@ -11,10 +11,10 @@ p {
 }
 
 
-h1 {
+/* h1 {
 	font-size: 2.5rem;
 	font-family: 'Varela Round', sans-serif;
-}
+} */
 
 form {
 	display: grid;
@@ -35,7 +35,6 @@ form {
 }
 
 body {
-	padding: 2rem;
 	width: 100%;
 }
 
