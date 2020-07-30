@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import { Switch, Route} from 'react-router-dom';
 import 'reset-css';
 import './styles/App.scss';
@@ -11,9 +11,12 @@ import Register from './components/register/register';
 import Login from './components/Login/components/Log';
 import PrivateRoute from './components/PrivateComponent';
 import Navbar from './components/navbar/navbar'
+import LoadingOverlay from './components/LoadingOverlay';
 
 
 function App() {
+
+
   return (
     <div>
     <Navbar />
@@ -27,6 +30,7 @@ function App() {
         <UpdateProperty />
       </PrivateRoute>
       <PrivateRoute path='/'>
+        <LoadingOverlay />
         <UserDashboard />
       </PrivateRoute>
     </Switch>
