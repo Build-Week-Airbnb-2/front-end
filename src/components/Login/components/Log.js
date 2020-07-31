@@ -56,7 +56,7 @@ const onSubmitHandler =(e)=>{
                     Login
 				</Button>
             </form>
-
+            {error && <p>{error.data.message}</p>}
         </div>
  
     )
