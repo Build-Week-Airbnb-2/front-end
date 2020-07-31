@@ -21,7 +21,8 @@ const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler})
 		transit_len
 	} = formValues;
 	return (
-		<form className="multiform-container">
+		<div className="center-middle">
+			<form className="multiform-container">
 			<TextField
 				value={instant_bookable}
 				label="Instantly Bookable"
@@ -65,6 +66,8 @@ const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler})
 				Back
 			</Button>
 		</form>
+	</div>
+		
 	);
 };
 

@@ -1,0 +1,11 @@
+.multiform-container {
+    display: grid;
+    grid-gap: 1rem;
+}
+
+.center-middle {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 80vh;
+}
