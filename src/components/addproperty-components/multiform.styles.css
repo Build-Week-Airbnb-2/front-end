@@ -28,3 +28,12 @@
 	display: flex;
 	justify-content: space-evenly;
 }
+
+#submit-button{
+	border-color: #43a047;
+	color: #43a047;
+}
+
+#submit-button:hover{
+	background-color: #43a04809;
+}

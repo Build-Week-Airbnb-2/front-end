@@ -1,4 +1,6 @@
 import React from 'react';
+import { green } from '@material-ui/core/colors';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import {
 	TextField,
 	Button,
@@ -11,15 +13,33 @@ import {
 } from '@material-ui/core';
 import StepTracker from './stepTracker';
 
-// cancellation_policy: 'moderate',
-// 	instant_bookable: 't',
-// 	is_business_travel_ready: 'f',
-// 	review_scores_rating: 90,
-// 	number_of_reviews: 4,
-// 	transit_len: 'There is a bus stop at the end of the street!',
-// 	name: 'Silver Lake House'
 
-const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler, step }) => {
+// const GreenRadio = withStyles({
+// 	root: {
+// 		color: green[400],
+// 		'&$checked': {
+// 			color: green[600]
+// 		}
+// 	},
+// 	checked: {}
+// })((props) => <Radio color="default" {...props} />);
+
+
+
+
+
+
+
+const useStyles = makeStyles({
+	submit:{
+		color: green[400],
+		color: 'white',
+		backgroundColor: green[400]
+	}
+})
+
+
+const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler, step, setStep }) => {
 	const {
 		instant_bookable,
 		cancellation_policy,
@@ -28,6 +48,8 @@ const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler, 
 		number_of_reviews,
 		transit_len
 	} = formValues;
+
+	const classes = useStyles()
 	return (
 		<div className="center-middle">
 			<form className="multiform-container">
@@ -80,13 +102,15 @@ const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler, 
 					onChange={changeHandler}
 					name="transit_len"
 				/>
-				<StepTracker step={step} />
-				<Button color="secondary" onClick={submitHandler}>
+				<StepTracker step={step} setStep={setStep}/>
+				<Button onClick={submitHandler}  variant='outlined' color='secondary' id='submit-button'>
 					Submit
 				</Button>
 				<Button color="secondary" onClick={prevStep}>
 					Back
 				</Button>
+		
+				
 			</form>
 		</div>
 	);

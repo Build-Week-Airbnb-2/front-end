@@ -12,14 +12,16 @@ const GreenRadio = withStyles({
 	},
 	checked: {}
 })((props) => <Radio color="default" {...props} />);
-const StepTracker = ({ step }) => {
+
+
+const StepTracker = ({ step, setStep }) => {
+
 	return (
 		<div className="step-tracker">
-			<Radio checked={step} />
-			<Radio checked={step >= 2} />
-
-			<Radio checked={step >= 3} />
-			<GreenRadio checked={step >= 4} />
+			<Radio checked={step == 1} onClick={() => setStep(1)}/>
+			<Radio checked={step == 2} onClick={() => setStep(2)}/>
+			<Radio checked={step == 3} onClick={() => setStep(3)}/>
+			<GreenRadio checked={step == 4} onClick={() => setStep(4)}/>
 		</div>
 	);
 };
