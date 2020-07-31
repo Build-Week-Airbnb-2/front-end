@@ -12,6 +12,7 @@ import Login from './components/Login/components/Log';
 import PrivateRoute from './components/PrivateComponent';
 import Navbar from './components/navbar/navbar';
 import Mvp from './components/mvp-ignore/mvp';
+import LoadingOverlay from './components/LoadingOverlay'
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 					<UpdateProperty />
 				</PrivateRoute>
 				<PrivateRoute path="/">
+					<LoadingOverlay />
 					<UserDashboard />
 				</PrivateRoute>
 			</Switch>
