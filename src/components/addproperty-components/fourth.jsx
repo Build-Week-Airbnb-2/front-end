@@ -9,6 +9,7 @@ import {
 	RadioGroup,
 	Radio
 } from '@material-ui/core';
+import StepTracker from './stepTracker';
 
 // cancellation_policy: 'moderate',
 // 	instant_bookable: 't',
@@ -18,7 +19,7 @@ import {
 // 	transit_len: 'There is a bus stop at the end of the street!',
 // 	name: 'Silver Lake House'
 
-const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler }) => {
+const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler, step }) => {
 	const {
 		instant_bookable,
 		cancellation_policy,
@@ -42,12 +43,12 @@ const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler }
 						<FormControlLabel value="f" control={<Radio />} label="False" />
 					</div>
 				</RadioGroup>
-					<InputLabel>Do you have any airports or trains nearby?</InputLabel>
-					<RadioGroup
-						aria-label="gender"
-						name="is_business_travel_ready"
-						value={is_business_travel_ready}
-						onChange={changeHandler}
+				<InputLabel>Do you have any airports or trains nearby?</InputLabel>
+				<RadioGroup
+					aria-label="gender"
+					name="is_business_travel_ready"
+					value={is_business_travel_ready}
+					onChange={changeHandler}
 				>
 					<div className="radio-buttons">
 						<FormControlLabel value="t" control={<Radio />} label="Yes!" />
@@ -60,15 +61,6 @@ const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler }
 					<MenuItem value="moderate">Moderate</MenuItem>
 					<MenuItem value="strict">Strict</MenuItem>
 				</TextField>
-
-				{/* <TextField
-					label="Do you have any airports nearby?"
-					value={is_business_travel_ready}
-					onChange={changeHandler}
-					name="is_business_travel_ready"
-				/> */}
-		
-
 
 				<TextField
 					label="Overall Rating"
@@ -88,6 +80,7 @@ const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler }
 					onChange={changeHandler}
 					name="transit_len"
 				/>
+				<StepTracker step={step} />
 				<Button color="secondary" onClick={submitHandler}>
 					Submit
 				</Button>

@@ -18,3 +18,13 @@
 #demo-simple-select-label{
 	width: 100%;
 }
+
+.direction-buttons{
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.step-tracker{
+	display: flex;
+	justify-content: space-evenly;
+}

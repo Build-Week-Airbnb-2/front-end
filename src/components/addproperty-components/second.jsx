@@ -1,11 +1,11 @@
 import React from 'react';
 import { TextField, Button, InputLabel, MenuItem } from '@material-ui/core';
 import states from '../../utils/states'
+import StepTracker from './stepTracker'
 
 
 
-
-const Second = ({ nextStep, prevStep, changeHandler, formValues }) => {
+const Second = ({ nextStep, prevStep, changeHandler, formValues, step }) => {
 	const { city, neighbourhood, zipcode, property_type, state } = formValues;
 	return (
 		<div className="center-middle">
@@ -26,7 +26,7 @@ const Second = ({ nextStep, prevStep, changeHandler, formValues }) => {
 						return <MenuItem value={state[0]}>{state[1]}</MenuItem>;
 					})}
 				</TextField>
-
+				<StepTracker step={step}></StepTracker>
 				<Button color="secondary" onClick={nextStep}>
 					Continue
 				</Button>

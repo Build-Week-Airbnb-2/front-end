@@ -85,7 +85,7 @@ export default function AddProperty() {
 			...formValues,
 			[e.target.name]: e.target.value
 		});
-		console.log('Changed')
+		console.log('Changed');
 		console.log(formValues);
 	};
 
@@ -101,13 +101,38 @@ export default function AddProperty() {
 
 	switch (step) {
 		case 1:
-			return <First nextStep={nextStep} changeHandler={changeHandler} formValues={formValues}/>;
+			return <First nextStep={nextStep} changeHandler={changeHandler} formValues={formValues} step={step} />;
 		case 2:
-			return <Second nextStep={nextStep} prevStep={prevStep} changeHandler={changeHandler} formValues={formValues}/>;
+			return (
+				<Second
+					nextStep={nextStep}
+					prevStep={prevStep}
+					changeHandler={changeHandler}
+					step={step}
+					formValues={formValues}
+				/>
+			);
 		case 3:
-			return <Third nextStep={nextStep} prevStep={prevStep} changeHandler={changeHandler} formValues={formValues}/>;
+			return (
+				<Third
+					nextStep={nextStep}
+					prevStep={prevStep}
+					changeHandler={changeHandler}
+					step={step}
+					formValues={formValues}
+				/>
+			);
 		case 4:
-			return <Fourth nextStep={nextStep} prevStep={prevStep} submitHandler={addProperty} changeHandler={changeHandler} formValues={formValues}/>;
+			return (
+				<Fourth
+					nextStep={nextStep}
+					prevStep={prevStep}
+					submitHandler={addProperty}
+					step={step}
+					changeHandler={changeHandler}
+					formValues={formValues}
+				/>
+			);
 	}
 }
 

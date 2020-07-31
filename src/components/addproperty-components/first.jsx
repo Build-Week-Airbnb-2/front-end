@@ -1,8 +1,9 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 import './multiform.styles.css';
+import StepTracker from '../addproperty-components/stepTracker';
 
-const First = ({ nextStep, changeHandler, formValues }) => {
+const First = ({ nextStep, changeHandler, formValues, step }) => {
 	const { name, description_len, host_about_len } = formValues;
 	return (
 		<div className="center-middle">
@@ -24,6 +25,7 @@ const First = ({ nextStep, changeHandler, formValues }) => {
 					multiline
 					rows={5}
 				/>
+				<StepTracker step={step}></StepTracker>
 				<Button color="secondary" onClick={nextStep}>
 					Continue
 				</Button>
