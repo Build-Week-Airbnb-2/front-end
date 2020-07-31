@@ -128,7 +128,7 @@ function Property({ property }) {
 				 - ${bedrooms} ${bedrooms > 1 || bedrooms == 0 ? 'Bedrooms': 'Bedroom'} - 
 					${bathrooms} ${bathrooms > 1 || bathrooms == 0 ? 'bathrooms' : 'bathroom'}`}
 			/>
-			{price && <CardHeader title={`Price Suggestion $${price}`} />}
+			{price && <CardHeader className='price' title={`Price Suggestion $${price}`} />}
 			<CardMedia
 				className="property-image"
 				image="https://images.unsplash.com/photo-1593456552723-eeb2041c434e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
