@@ -11,7 +11,7 @@ import { TextField, Button } from '@material-ui/core';
 // 	transit_len: 'There is a bus stop at the end of the street!',
 // 	name: 'Silver Lake House'
 
-const Fourth = ({ nextStep, prevStep, changeHandler, formValues, addProperty }) => {
+const Fourth = ({ nextStep, prevStep, changeHandler, formValues, submitHandler}) => {
 	const {
 		instant_bookable,
 		cancellation_policy,
@@ -58,7 +58,7 @@ const Fourth = ({ nextStep, prevStep, changeHandler, formValues, addProperty }) 
 				onChange={changeHandler}
 				name="transit_len"
 			/>
-			<Button color="secondary" onClick={addProperty}>
+			<Button color="secondary" onClick={submitHandler}>
 				Submit
 			</Button>
 			<Button color="secondary" onClick={prevStep}>

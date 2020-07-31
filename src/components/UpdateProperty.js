@@ -1,276 +1,108 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {  updateListing } from "../store/actions/actions";
-import { axiosWithAuth }from '../utils/axiosWithAuth'
-import Lottie from "react-lottie";
-import animationData from "../assets/lotties/spinner.json";
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateListing } from '../store/actions/actions';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Lottie from 'react-lottie';
+import animationData from '../assets/lotties/spinner.json';
+import First from './addproperty-components/first';
+import Second from './addproperty-components/second';
+import Third from './addproperty-components/third';
+import Fourth from './addproperty-components/fourth';
 
 const initialFormValues = {
-  host_about_len: '',
-  description_len: '',
-  property_type: '',
-  neighbourhood: '',
-  city: '',
-  state: '',
-  zipcode: '',
-  bathrooms: '',
-  bedrooms: '',
-  beds: '',
-  accommodates: '',
-  guests_included: '',
-  square_feet: '',
-  cancellation_policy: '',
-  instant_bookable: '',
-  is_business_travel_ready: '',
-  review_scores_rating: '',
-  number_of_reviews:'' ,
-  transit_len: '',
-  name: '',
+	host_about_len: '',
+	description_len: '',
+	property_type: '',
+	neighbourhood: '',
+	city: '',
+	state: '',
+	zipcode: '',
+	bathrooms: '',
+	bedrooms: '',
+	beds: '',
+	accommodates: '',
+	guests_included: '',
+	square_feet: '',
+	cancellation_policy: '',
+	instant_bookable: '',
+	is_business_travel_ready: '',
+	review_scores_rating: '',
+	number_of_reviews: '',
+	transit_len: '',
+	name: ''
 };
-
 
 //lottie file options
 const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: animationData,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
+	loop: true,
+	autoplay: true,
+	animationData: animationData,
+	rendererSettings: {
+		preserveAspectRatio: 'xMidYMid slice'
+	}
 };
 
 export default function AddProperty() {
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loading);
-  const listings = useSelector((state) => state.listings);
-  const history = useHistory();
-  const { id } = useParams()
+	const [ formValues, setFormValues ] = useState(initialFormValues);
+	const dispatch = useDispatch();
+	const loading = useSelector((state) => state.loading);
+	const listings = useSelector((state) => state.listings);
+	const history = useHistory();
+	const { id } = useParams();
 
-  
+	const changeHandler = (e) => {
+		setFormValues({
+			...formValues,
+			[e.target.name]: e.target.value
+		});
+	};
 
-  const changeHandler = (e) => {
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.value,
-    });
-  };
+	const sumbitHandler = (e) => {
+		e.preventDefault();
+		dispatch(updateListing(id, formValues, history));
+	};
 
-  const sumbitHandler =(e) =>{
-    e.preventDefault()
-    dispatch(updateListing(id, formValues, history))
-  }
+	useEffect(() => {
+		axiosWithAuth()
+			.get(`/api/listings/${id}`)
+			.then((res) => {
+				setFormValues(res.data.listing);
+			})
+			.catch((err) => {
+				console.log(err.response);
+			});
+	}, []);
 
-  useEffect(()=> {
-    axiosWithAuth()
-    .get(`/api/listings/${id}`)
-    .then((res) => {
-      setFormValues(res.data.listing)
-    })
-    .catch((err) => {
-      console.log(err.response);
-    });
-  },[])
+	let [ step, setStep ] = useState(1);
 
- 
+	const nextStep = () => {
+		return setStep(step + 1);
+	};
 
+	const prevStep = () => {
+		return setStep(step - 1);
+	};
 
-  return (
-    <div className="add-property-form">
-      <h1>Add property component</h1>
-      <form onSubmit={sumbitHandler} >
-        <label>
-          Name
-          <input
-            type="text"
-            name="name"
-            onChange={changeHandler}
-            value={formValues.name}
-          />
-        </label>
-        <label>
-          Description
-          <input
-            type="text"
-            name="description"
-            onChange={changeHandler}
-            value={formValues.description_len}
-          />
-        </label>
-        <label>
-          Property Type
-          <input
-            type="text"
-            name="property_type"
-            onChange={changeHandler}
-            value={formValues.property_type}
-          />
-        </label>
-        <label>
-          About Host
-          <input
-            type="text"
-            name="host_about_len"
-            onChange={changeHandler}
-            value={formValues.host_about_len}
-          />
-        </label>
-        <label>
-          Neighbourhood
-          <input
-            type="text"
-            name="neighbourhood"
-            onChange={changeHandler}
-            value={formValues.neighbourhood}
-          />
-        </label>
-        <label>
-          City
-          <input
-            type="text"
-            name="city"
-            onChange={changeHandler}
-            value={formValues.city}
-          />
-        </label>
-        <label>
-          State
-          <input
-            type="text"
-            name="state"
-            onChange={changeHandler}
-            value={formValues.state}
-          />
-        </label>
-        <label>
-          zipcode
-          <input
-            type="text"
-            name="zipcode"
-            onChange={changeHandler}
-            value={formValues.zipcode}
-          />
-        </label>
-        <label>
-          bathrooms
-          <input
-            type="number"
-            name="bathrooms"
-            onChange={changeHandler}
-            value={formValues.bathrooms}
-          />
-        </label>
-        <label>
-          bedrooms
-          <input
-            type="number"
-            name="bedrooms"
-            onChange={changeHandler}
-            value={formValues.bedrooms}
-          />
-        </label>
-        <label>
-          beds
-          <input
-            type="number"
-            name="beds"
-            onChange={changeHandler}
-            value={formValues.beds}
-          />
-        </label>
-        <label>
-          accommodates
-          <input
-            type="number"
-            name="accommodates"
-            onChange={changeHandler}
-            value={formValues.accommodates}
-          />
-        </label>
-        <label>
-          guests included
-          <input
-            type="number"
-            name="guests_included"
-            onChange={changeHandler}
-            value={formValues.guests_included}
-          />
-        </label>
-        <label>
-          square feet
-          <input
-            type="text"
-            name="square_feet"
-            onChange={changeHandler}
-            value={formValues.square_feet}
-          />
-        </label>
-        <label>
-          cancellation policy
-          <input
-            type="text"
-            name="cancellation_policy"
-            onChange={changeHandler}
-            value={formValues.cancellation_policy}
-          />
-        </label>
-        <label>
-          instant bookable
-          <input
-            type="text"
-            name="instant_bookable"
-            onChange={changeHandler}
-            value={formValues.instant_bookable}
-          />
-        </label>
-        <label>
-          business travel ready
-          <input
-            type="text"
-            name="is_business_travel_ready"
-            onChange={changeHandler}
-            value={formValues.is_business_travel_ready}
-          />
-        </label>
-        <label>
-          review scores rating
-          <input
-            type="number"
-            name="review_scores_rating"
-            onChange={changeHandler}
-            value={formValues.review_scores_rating}
-          />
-        </label>
-        <label>
-          number of reviews
-          <input
-            type="number"
-            name="number_of_reviews"
-            onChange={changeHandler}
-            value={formValues.number_of_reviews}
-          />
-        </label>
-        <label>
-          transit
-          <input
-            type="text"
-            name="transit_len"
-            onChange={changeHandler}
-            value={formValues.transit_len}
-          />
-        </label>
-        {!loading ? (
-          <button>Update Property</button>
-        ) : (
-          <Lottie
-            className="loading"
-            options={defaultOptions}
-            height={100}
-            width={100}
-          />
-        )}
-      </form>
-    </div>
-  );
+	switch (step) {
+		case 1:
+			return <First changeHandler={changeHandler} formValues={formValues} nextStep={nextStep} />;
+		case 2:
+			return (
+				<Second changeHandler={changeHandler} formValues={formValues} prevStep={prevStep} nextStep={nextStep} />
+			);
+		case 3:
+			return (
+				<Third changeHandler={changeHandler} formValues={formValues} prevStep={prevStep} nextStep={nextStep} />
+			);
+		case 4:
+			return (
+				<Fourth
+					changeHandler={changeHandler}
+					formValues={formValues}
+					prevStep={prevStep}
+					submitHandler={sumbitHandler}
+				/>
+			);
+	}
 }

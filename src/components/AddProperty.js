@@ -106,7 +106,7 @@ export default function AddProperty() {
 		case 3:
 			return <Third nextStep={nextStep} prevStep={prevStep} changeHandler={changeHandler} formValues={formValues}/>;
 		case 4:
-			return <Fourth nextStep={nextStep} prevStep={prevStep} addProperty={addProperty} changeHandler={changeHandler} formValues={formValues}/>;
+			return <Fourth nextStep={nextStep} prevStep={prevStep} submitHandler={addProperty} changeHandler={changeHandler} formValues={formValues}/>;
 	}
 }
 
