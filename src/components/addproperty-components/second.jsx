@@ -1,11 +1,9 @@
 import React from 'react';
 import { TextField, Button, InputLabel, MenuItem } from '@material-ui/core';
-import states from '../../utils/states'
+import states from '../../utils/states';
+import StepTracker from './stepTracker';
 
-
-
-
-const Second = ({ nextStep, prevStep, changeHandler, formValues }) => {
+const Second = ({ nextStep, prevStep, changeHandler, formValues, step, setStep }) => {
 	const { city, neighbourhood, zipcode, property_type, state } = formValues;
 	return (
 		<div className="center-middle">
@@ -26,13 +24,15 @@ const Second = ({ nextStep, prevStep, changeHandler, formValues }) => {
 						return <MenuItem value={state[0]}>{state[1]}</MenuItem>;
 					})}
 				</TextField>
-
-				<Button color="secondary" onClick={nextStep}>
-					Continue
-				</Button>
-				<Button color="secondary" onClick={prevStep}>
-					Back
-				</Button>
+				<StepTracker step={step} setStep={setStep}/>
+				<div className="direction-buttons">
+					<Button color="secondary" onClick={prevStep}>
+						Back
+					</Button>
+					<Button color="secondary" variant="contained" onClick={nextStep}>
+						Continue
+					</Button>
+				</div>
 			</form>
 		</div>
 	);

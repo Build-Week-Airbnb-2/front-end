@@ -8,6 +8,7 @@ import First from './addproperty-components/first';
 import Second from './addproperty-components/second';
 import Third from './addproperty-components/third';
 import Fourth from './addproperty-components/fourth';
+
 // const initialFormValues = {
 //   host_about_len: '',
 //   description_len: '',
@@ -85,7 +86,7 @@ export default function AddProperty() {
 			...formValues,
 			[e.target.name]: e.target.value
 		});
-		console.log('Changed')
+		console.log('Changed');
 		console.log(formValues);
 	};
 
@@ -101,13 +102,49 @@ export default function AddProperty() {
 
 	switch (step) {
 		case 1:
-			return <First nextStep={nextStep} changeHandler={changeHandler} formValues={formValues}/>;
+			return (
+				<First
+					setStep={setStep}
+					nextStep={nextStep}
+					changeHandler={changeHandler}
+					formValues={formValues}
+					step={step}
+				/>
+			);
 		case 2:
-			return <Second nextStep={nextStep} prevStep={prevStep} changeHandler={changeHandler} formValues={formValues}/>;
+			return (
+				<Second
+					setStep={setStep}
+					nextStep={nextStep}
+					prevStep={prevStep}
+					changeHandler={changeHandler}
+					step={step}
+					formValues={formValues}
+				/>
+			);
 		case 3:
-			return <Third nextStep={nextStep} prevStep={prevStep} changeHandler={changeHandler} formValues={formValues}/>;
+			return (
+				<Third
+					setStep={setStep}
+					nextStep={nextStep}
+					prevStep={prevStep}
+					changeHandler={changeHandler}
+					step={step}
+					formValues={formValues}
+				/>
+			);
 		case 4:
-			return <Fourth nextStep={nextStep} prevStep={prevStep} submitHandler={addProperty} changeHandler={changeHandler} formValues={formValues}/>;
+			return (
+				<Fourth
+					setStep={setStep}
+					nextStep={nextStep}
+					prevStep={prevStep}
+					submitHandler={addProperty}
+					step={step}
+					changeHandler={changeHandler}
+					formValues={formValues}
+				/>
+			);
 	}
 }
 

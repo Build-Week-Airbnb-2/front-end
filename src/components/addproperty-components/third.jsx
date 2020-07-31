@@ -1,7 +1,9 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
+import StepTracker from './stepTracker'
 
-const Third = ({ nextStep, prevStep, changeHandler, formValues }) => {
+
+const Third = ({ nextStep, prevStep, changeHandler, formValues , step, setStep}) => {
 	const { bedrooms, bathrooms, beds, accommodates, guests_included, square_feet } = formValues;
 	return (
 		<div className="center-middle">
@@ -12,13 +14,16 @@ const Third = ({ nextStep, prevStep, changeHandler, formValues }) => {
 				<TextField label="accomodates" value={accommodates} onChange={changeHandler} name="accommodates" />
 				<TextField label="guests included" value={guests_included} onChange={changeHandler} name="guests_included" />
 				<TextField label="square feet" onChange={changeHandler} value={square_feet} name="square_feet" />
-
-				<Button color="secondary" onClick={nextStep}>
-					Continue
-				</Button>
-				<Button color="secondary" onClick={prevStep}>
+				<StepTracker step={step} setStep={setStep}></StepTracker>
+				<div className="direction-buttons">
+					<Button color="secondary" onClick={prevStep}>
 					Back
-				</Button>
+					</Button>
+					<Button color="secondary" onClick={nextStep} variant="contained">
+							Continue
+					</Button>
+				</div>
+				
 			</form>
 		</div>
 		
