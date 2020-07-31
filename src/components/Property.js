@@ -123,7 +123,10 @@ function Property({ property }) {
 				// return history.push(`/update-property/${property.id}`)
 
 				title={`${name} (${property_type})`}
-				subheader={`${beds} beds - ${bedrooms} Bedrooms - ${bathrooms} bathrooms`}
+				// Refactor into a function
+				subheader={`${beds} ${beds > 1 || beds == 0 ? 'Beds' : 'Bed'}
+				 - ${bedrooms} ${bedrooms > 1 || bedrooms == 0 ? 'Bedrooms': 'Bedroom'} - 
+					${bathrooms} ${bathrooms > 1 || bathrooms == 0 ? 'bathrooms' : 'bathroom'}`}
 			/>
 			{price && <CardHeader title={`Price Suggestion $${price}`} />}
 			<CardMedia

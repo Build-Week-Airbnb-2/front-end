@@ -39,7 +39,7 @@ const initialFormValues = {
 	city: 'Everett', //
 	state: 'WA', //
 	zipcode: '98208', //
-	bathrooms: 1.75, //
+	bathrooms: 1, //
 	bedrooms: 3, //
 	beds: 6, //
 	accommodates: 6, //
@@ -85,6 +85,7 @@ export default function AddProperty() {
 			...formValues,
 			[e.target.name]: e.target.value
 		});
+		console.log('Changed')
 		console.log(formValues);
 	};
 
