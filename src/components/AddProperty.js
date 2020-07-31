@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPriceSuggestion, addListing } from '../store/actions/actions';
 import Lottie from 'react-lottie';
 import animationData from '../assets/lotties/spinner.json';
-import First from './first';
-import Second from './second'
-import Third from './third'
-import Fourth from './fourth'
+import First from './addproperty-components/first';
+import Second from './addproperty-components/second';
+import Third from './addproperty-components/third';
+import Fourth from './addproperty-components/fourth';
 // const initialFormValues = {
 //   host_about_len: '',
 //   description_len: '',
@@ -32,26 +32,26 @@ import Fourth from './fourth'
 // };
 
 const initialFormValues = {
-	host_about_len: 'My wife and I own this house and rent out the guest rooms on weekends',
-	description_len: 'A quiet house in north seattle',
-	property_type: 'House',
-	neighbourhood: 'Silver Lake',
-	city: 'Everett',
-	state: 'WA',
-	zipcode: '98208',
-	bathrooms: 1.75,
-	bedrooms: 3,
-	beds: 6,
-	accommodates: 6,
-	guests_included: 2,
-	square_feet: '1200',
-	cancellation_policy: 'moderate',
+	host_about_len: 'My wife and I own this house and rent out the guest rooms on weekends', //
+	description_len: 'A quiet house in north seattle', //
+	property_type: 'House', //
+	neighbourhood: 'Silver Lake', //
+	city: 'Everett', //
+	state: 'WA', //
+	zipcode: '98208', //
+	bathrooms: 1.75, //
+	bedrooms: 3, //
+	beds: 6, //
+	accommodates: 6, //
+	guests_included: 2, //
+	square_feet: '1200', //
+	cancellation_policy: 'moderate', //
 	instant_bookable: 't',
-	is_business_travel_ready: 'f',
-	review_scores_rating: 90,
-	number_of_reviews: 4,
-	transit_len: 'There is a bus stop at the end of the street!',
-	name: 'Silver Lake House'
+	is_business_travel_ready: 'f', //
+	review_scores_rating: 90, //
+	number_of_reviews: 4, //
+	transit_len: 'There is a bus stop at the end of the street!', //
+	name: 'Silver Lake House' //
 };
 
 //lottie file options
@@ -85,6 +85,7 @@ export default function AddProperty() {
 			...formValues,
 			[e.target.name]: e.target.value
 		});
+		console.log(formValues);
 	};
 
 	const addProperty = (e) => {
@@ -97,16 +98,15 @@ export default function AddProperty() {
 		setFormValues(initialFormValues);
 	};
 
-
 	switch (step) {
 		case 1:
-			return <First nextStep={nextStep} changeHandler={changeHandler}/>;
+			return <First nextStep={nextStep} changeHandler={changeHandler} formValues={formValues}/>;
 		case 2:
-			return <Second nextStep={nextStep} prevStep={prevStep}></Second>
-		case 3: 
-			return <Third nextStep={nextStep} prevStep={prevStep} changeHandler={changeHandler}></Third>
+			return <Second nextStep={nextStep} prevStep={prevStep} changeHandler={changeHandler} formValues={formValues}/>;
+		case 3:
+			return <Third nextStep={nextStep} prevStep={prevStep} changeHandler={changeHandler} formValues={formValues}/>;
 		case 4:
-			return <Fourth prevStep={prevStep} changeHandler={changeHandler}></Fourth>
+			return <Fourth nextStep={nextStep} prevStep={prevStep} addProperty={addProperty} changeHandler={changeHandler} formValues={formValues}/>;
 	}
 }
 
