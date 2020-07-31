@@ -32,7 +32,7 @@ const defaultOptions = {
 
   return (
     <div className='user-dashboard'>
-      <h1>Airbnb pricing calculator</h1>
+      <h1>Airbnb Pricing Calculator</h1>
 
       { loading && (
         <Lottie 

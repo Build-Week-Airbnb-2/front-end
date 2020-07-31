@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { TextField } from '@material-ui/core';
 import * as Yup from 'yup';
@@ -15,7 +15,7 @@ const initialFormValues = {
 };
 
 const Register = () => {
-	const error = useSelector(state => state.error);  //global error state
+	const error = useSelector((state) => state.error); //global error state
 	const dispatch = useDispatch();
 	const history = useHistory();
 	let [ formValues, setFormValues ] = useState(initialFormValues);
@@ -42,7 +42,7 @@ const Register = () => {
 				dispatch(registerUser(newUser, history));
 			} else if (!valid) {
 				// setting global error
-				dispatch({type: 'ERROR', payload: {error: 'Please Fill Out All Fields'}})
+				dispatch({ type: 'ERROR', payload: { error: 'Please Fill Out All Fields' } });
 			}
 		});
 	};

@@ -57,26 +57,6 @@ const onSubmitHandler =(e)=>{
 				</Button>
             </form>
 
-            {/* <div style={{display: 'flex',
-         justifyContent: 'center',
-          marginTop: '15%',
-           marginLeft: '38%',
-           width: "24%",
-           boxShadow: '7px 7px 8px 8px #888888'
-           } }>
-        
-        
-         {error && <div>{error.data.message}</div> }
-            <FormControl >
-            
-            <Text>Don't have an Acount? <br/>
-           <span style={{marginLeft: '30px'}}>
-           <Link style={{textDecoration: 'none'}} to='/register'>
-           <Button color="primary" variant="outlined" size="medium">Register</Button></Link>
-            </span>
-           </Text>
-           </FormControl>
-        </div> */}
         </div>
  
     )
@@ -97,20 +77,23 @@ const onSubmitHandler =(e)=>{
         
         
               
-            <FormControl >
-            <Text>Don't have an Acount? <br/>
-           <span style={{marginLeft: '30px'}}>
-           <Link style={{textDecoration: 'none'}} to='/'>
-           <Button color="primary" variant="outlined" size="medium">Register</Button></Link>
-            </span>
-           </Text>
+        //     <FormControl >
+        //     <Text>Don't have an Acount? <br/>
+        //    <span style={{marginLeft: '30px'}}>
+        //    <Link style={{textDecoration: 'none'}} to='/'>
+        //    <Button color="primary" variant="outlined" size="medium">Register</Button></Link>
+        //     </span>
+        //    </Text>
           
-            <br/>
-                <form>
-                <Input color='secondary' placeholder='email' type='text' name='email' id='email' value={userInput.email} onChange={onChangeHandler}/><br/>
-                <Input placeholder='password' type='password' name='password' id='password' value={userInput.password} onChange={onChangeHandler}/>
-                <br/>
-                <div style={{marginLeft: '27%', marginTop: '1%'}}><Button onClick={(e)=>{onSubmitHandler(e)}} color="secondary" size="large" >Login</Button></div>
-                </form>
-            </FormControl>
-        </div> */
+        //     <br/>
+        //         <form>
+        //         <Input color='secondary' placeholder='email' type='text' name='email' id='email' value={userInput.email} onChange={onChangeHandler}/><br/>
+        //         <Input placeholder='password' type='password' name='password' id='password' value={userInput.password} onChange={onChangeHandler}/>
+        //         <br/>
+        //         <div style={{marginLeft: '27%', marginTop: '1%'}}><Button onClick={(e)=>{onSubmitHandler(e)}} color="secondary" size="large" >Login</Button></div>
+        //         </form>
+        //     </FormControl>
+           
+        // </div> */
+        
+
